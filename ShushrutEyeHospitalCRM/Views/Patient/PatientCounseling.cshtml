@@ -1,0 +1,273 @@
+﻿@using System.Security.Claims;
+@model Tuple<PatientViewModel,IEnumerable<DoctorViewModel>>;
+@{
+    ViewData["Title"] = "PatientCounseling";
+
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/jquery_validation.css" />
+<link href="~/css/jquery-ui.css" rel="stylesheet" />
+<style>
+
+    .letter-head article {
+        width: 210mm;
+        height: auto;
+        margin: 20px auto;
+        position: relative;
+    }
+
+    .letter-head address {
+        text-align: right;
+        padding: 0 15px 0 0;
+        bottom: 8mm;
+        right: 20mm;
+    }
+
+    .letter-head .ccc h5 {
+        margin: 6px 0;
+    }
+
+    .letter-head .ccc, address {
+        color: #000000 !important;
+    }
+
+        .letter-head .ccc h3 {
+            margin: 3px 0;
+        }
+
+    .letter-head h1 {
+        top: 12mm;
+        left: 20mm;
+        width: 221px;
+        height: 149px;
+        font-size: 20px;
+        letter-spacing: 1px;
+        text-align: center;
+        padding: 0px 0;
+        color: white;
+        line-height: 9;
+        text-shadow: 1px 1px 1px black;
+    }
+
+    .letter-head .head {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        padding: 0 4%;
+        background-color: #ededed;
+    }
+    /* Your CSS below here */
+    .letter-head article {
+        background-color: #fff;
+        border-top: 5px solid #b30000;
+        border-bottom: 5px solid #b30000;
+    }
+
+    .letter-head h1 {
+        box-shadow: 5px 5px 1px rgba(0,0,0,0.7);
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: #31349d;
+    }
+
+    .letter-head .contant {
+        padding: 30px 60px;
+    }
+
+    .head img {
+        padding: 50px 0 50px 0;
+    }
+
+    tbody th {
+        font-weight: 600;
+    }
+</style>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="header-icon">
+            <i class="pe-7s-note2"></i>
+        </div>
+        <div class="header-title">
+            <h1>Patient Counselling </h1>
+            <small>Patient Counselling </small>
+            <ol class="breadcrumb hidden-xs">
+                <li><a href="~/Home/Index"><i class="pe-7s-home"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- Form controls -->
+            <div class="col-sm-12">
+                @*  <div class="panel panel-bd lobidrag">
+                <div class="panel-heading">
+                </div>
+                <div class="panel-body"> *@
+                <div class="form-group">
+                    <input type="hidden" id="txtPatientId" name="txtPatientId" value="@Model.Item1.Id" class="form-control" />
+                </div>
+
+
+
+                <div class="letter-head">
+                    <article>
+                        <div style="width:100%">
+                            <table class="table" style="text-align:center;border:none;">
+                                <tr>
+                                    <td style="vertical-align:middle; border:none;padding:0;"><img src="~/images/logobig.jpg" alt="" style="width: 100%; height:70px"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border:none;padding:0;">
+                                        <h5><b>Address-</b>Plot no 5 , 1st Floor, Ishwarpuri, Sector 12 Indra Nagar, Lucknow-226016 <b>Phone-</b>9026353723 (Whatsapp)</h5>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                        @*<div class="head">
+                            @<img src="~/images/logo.png" alt="" style="width: 200px;">
+                            <div class="ccc ms-auto pr-3 text-center text-white">
+                                <h3>Sushrut Eye Hospital<br></h3>
+                                <h5>Plot no 5 , 1st Floor, Ishwarpuri, Sector 12 Indra Nagar, Lucknow-226016</h5>
+                                <b>Phone-</b>9026353723 (Whatsapp)<br>
+                            </div>
+                        </div>*@
+                        <div class="contant">
+                            <div class="tables-container">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th colspan="4" class="text-center">Patients Details</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <td> @Model.Item1.ApplicationUser!.FirstName&nbsp;@Model.Item1.ApplicationUser.LastName</td>
+                                        <th>Mobile</th>
+                                        <td>@Model.Item1.ApplicationUser.PhoneNumber</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Age</th>
+                                        <td>
+                                            @{
+                                                var age = Convert.ToUInt32(System.DateTime.Today.Year) - Convert.ToInt32(Model.Item1.DOB!.Value.Year);
+                                            }
+                                            @age Years
+                                        </td>
+                                        <th>Sex</th>
+                                        <td>
+                                            @{
+                                                var gender = Model.Item1.Gender == "1" ? "Male" : "Female";
+                                            }
+                                            @gender
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <form id="frmPatientCounseling">
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label">MR No</label>
+                                        <input type="text" id="txtMRNO" name="txtMRNO" class="form-control" readonly value="@Model.Item1.MRDNo" />
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label">Booking Date</label>
+                                        <input type="date" id="txtBookingDate" name="txtBookingDate" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label">Diagnosis</label>
+                                        <input type="text" id="txtDiagnosis" name="txtDiagnosis" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label">Surgery Date &amp; Time</label>
+                                        <input type="date" id="txtSurgeryDateTime" name="txtSurgeryDateTime" class="form-control" />
+                                       @* <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                <input type="date" id="txtSurgeryDateTime" name="txtSurgeryDateTime" class="form-control" />
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <input type="time" id="txtSurgeryTime" name="txtSurgeryTime" class="form-control" />
+                                            </div>
+                                        </div>*@
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label">Eye to be Operated</label>
+                                        <div class="form-control">
+                                            <label class="radio-inline"><input name="OperatedEye" value="LE" type="radio" checked="checked">Left Eye</label>
+                                            <label class="radio-inline"><input name="OperatedEye" value="RE" type="radio">Right Eye</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label">Doctor</label>
+                                        <select class="form-control" id="DoctorName" name="DoctorName">
+                                            <option selected="selected" disabled="disabled" class="test" value="0">--Select--</option>
+                                            @foreach (var item in Model.Item2!)
+                                            {
+                                                var name = item.ApplicationUser!.FirstName + " " + item.ApplicationUser!.LastName;
+                                                <option value="@name">@item.ApplicationUser!.FirstName&nbsp;@item.ApplicationUser!.LastName&nbsp;(@item.Designation)</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label">Procedure Name</label>
+                                        <input type="text" id="txtProcedureName" name="txtProcedureName" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label">Package Name</label>
+                                        <input type="text" id="txtPackageName" name="txtPackageName" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label">Additional Procedure</label>
+                                        <input type="text" id="txtAdditionalProcedure" name="txtAdditionalProcedure" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label">Approx Charges</label>
+                                        <input type="number" id="txtApproxCharge" name="txtApproxCharge" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label">Anesthsia Type</label>
+                                        <input type="text" id="txtAnesthesiaType" name="txtAnesthesiaType" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label">Patient/Party</label>
+                                        <input type="text" id="txtPatientOrParty" name="txtPatientOrParty" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label">Status</label>
+                                        <div class="form-control">
+                                            <label class="radio-inline"><input name="Status" value="1" type="radio" checked="checked">Active</label>
+                                            <label class="radio-inline"><input name="Status" value="0" type="radio">In Active</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-12">
+                                        <label class="control-label">Counsellor Remarks</label>
+                                        <textarea type="text" id="txtRemarks" name="txtRemarks" class="form-control"></textarea>
+                                    </div>
+                                    <div class="col-sm-12 reset-button">
+                                        <button type="button" id="btnSubmit" class="btn btn-success">Save</button>
+                                        <button type="button" id="btnReset" class="btn btn-warning">Reset</button>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+                        <address>
+                            <p>Sushrut Eye Hospital</p>
+                            <p>
+                                Plot no 5 , 1st Floor, Ishwarpuri, Sector 12 Indra Nagar, Lucknow-226016<br>
+                            </p>
+                        </address>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section> <!-- /.content -->
+</div>
+@section scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript" src="~/js/patientcounseling.js"></script>
+}

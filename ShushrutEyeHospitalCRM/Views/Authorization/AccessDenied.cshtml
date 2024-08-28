@@ -1,0 +1,68 @@
+﻿@{
+    Layout = "/Views/Shared/_AccountLayout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Access Denied</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" type="text/css" rel="stylesheet" />
+    <style>
+        .circle-lock {
+            border: 1px solid #ccc;
+            padding: 40px;
+            border-radius: 87px;
+            width: 140px;
+        }
+
+            .circle-lock i {
+                font-size: 55px;
+                color: #ddd;
+            }
+
+        .container {
+            min-height: 100vh;
+        }
+
+        .title {
+            font-family: calibri;
+            font-size: 50px;
+        }
+
+        .para p:nth-child(1), .para p:nth-child(2) {
+            margin: 0;
+        }
+
+        .para p {
+            font-family: calibri;
+            font-size: 20px;
+        }
+        .btn-success{
+            font-size:18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="d-flex justify-content-center">
+                    <div class="circle-lock">
+                        <i class="fa fa-lock d-flex justify-content-center"></i>
+                    </div>
+                </div>
+                <h1 class="text-nowrap d-flex justify-content-center title">Access Denied</h1>
+                <div class="para">
+                    <p class="d-flex justify-content-center text-nowrap">You don't have permissions to access this page.</p>
+                    <p class="d-flex justify-content-center">Contact an administrator to get permissions or go to the home page</p>
+                    <p class="d-flex justify-content-center">and browse other pages</p>
+                </div>
+                <div class="d-flex justify-content-center"> <a href="~/Authorization/Index" class="btn btn-success">Go to login</a></div>
+            </div>
+        </div>
+    </div>
+    </body></html>

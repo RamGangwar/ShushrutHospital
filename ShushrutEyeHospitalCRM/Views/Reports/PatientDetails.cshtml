@@ -1,0 +1,84 @@
+﻿@model List<PatientViewModel>
+@{
+	List<SelectListItem> reports = new List<SelectListItem>();
+
+	reports.Add(new SelectListItem
+			{
+				Text = "Patient",
+				Value = "Patient"
+			});
+	reports.Add(new SelectListItem
+			{
+				Text = "OPD",
+				Value = "OPD"
+			});
+}
+<div class="content-wrapper">
+	<section class="content-header">
+		<div class="header-icon">
+			<i class="pe-7s-box1"></i>
+		</div>
+		<div class="header-title">
+			<h1>Reception</h1>
+			<small>Reception List</small>
+			<ol class="breadcrumb hidden-xs">
+				<li><a href="~/Home/Index"><i class="pe-7s-home"></i> Home</a></li>
+				<li class="active">Dashboard</li>
+			</ol>
+		</div>
+	</section>
+
+	<section class="content">
+		<div class="row">
+			<!-- Form controls -->
+			<div class="col-sm-12">
+				<div class="panel panel-bd lobidrag">
+					<div class="panel-heading">
+						<div class="btn-group">
+							<a class="btn btn-primary" href="~/Reception/Index">
+								<i class="fa fa-list"></i>  Reception Detail Report
+							</a>
+						</div>
+					</div>
+					<div class="panel-body">
+
+						<div class="container-fluid">
+							@*<div style="margin-left: -130px">
+							<img src="~/images/reportheader.png" />
+							</div>*@
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group row">
+										<div class="col-sm-2">
+											<label class="form-label">Reports :</label>
+										</div>
+										<div class="col-sm-4">
+											@Html.DropDownList("reports", new SelectList(reports, "Value", "Text"),new {id="reports",@class="form-control form-control-sm"})
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<div class="col-sm-2">
+											<label class="form-label">Patient No :</label>
+										</div>
+										<div class="col-sm-8">
+											<input type="text" id="PId" class="form-control form-control-sm" onkeydown="return isNumberKey(event);">
+										</div>
+										<input type="submit" value="PDF" class="btn btn-primary" id="pid" style="width:84px" onclick="return getReceptiondata();" />
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<input type="hidden" id="hideRtData" />
+	</section> <!-- /.content -->
+</div>
+@section scripts{
+	<!-- jquery validation -->
+	@await Html.PartialAsync("_ValidationScriptsPartial")
+	<script type="text/javascript" src="~/js/reports.js"></script>
+}

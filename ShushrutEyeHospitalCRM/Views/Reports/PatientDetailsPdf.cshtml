@@ -1,0 +1,224 @@
+﻿@using ShushrutEyeHospitalCRM.Models;
+@model IEnumerable<OPDReportViewModel>
+@{
+	Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+			integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+			crossorigin="anonymous"></script>
+	<style>
+		<style >
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+
+		.header {
+			overflow: hidden;
+			background-color: #f1f1f1;
+			padding: 20px 10px;
+		}
+
+			.header h6 {
+				/*float: left;*/
+				color: white;
+				text-align: center;
+				/*padding: 12px;*/
+				text-decoration: none;
+				font-size: 18px;
+				/*line-height: 25px;*/
+				border-radius: 4px;
+			}
+
+			.header h5 {
+				/*float: left;*/
+				color: white;
+				text-align: center;
+				/*padding: 12px;*/
+				text-decoration: none;
+				font-size: 27px;
+				/*line-height: 25px;*/
+				border-radius: 4px;
+			}
+
+			.header a.logo {
+				font-size: 25px;
+				font-weight: bold;
+			}
+
+			.header a:hover {
+				background-color: #ddd;
+				color: black;
+			}
+
+			.header a.active {
+				background-color: dodgerblue;
+				color: white;
+			}
+
+		.header-right {
+			float: right;
+		}
+
+		.media screen and (max-width: 500px) {
+			.header a
+
+		{
+			float: none;
+			display: block;
+			text-align: left;
+		}
+
+		.header-right {
+			float: none;
+		}
+
+		
+		.dvbox{
+			height:800px;
+			border:solid 1px;
+		}
+		.visbilitihid{
+			visibility:hidden;
+		}
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		@*<div style="margin-left: -130px">
+		<img src="~/images/reportheader.png" />
+		</div>*@
+		<div class="row">
+			<div class="col-md-12">
+				<div class="header" style="background-color:darkblue">
+					<img src="~/images/logo.png" />
+					<div class="header-right">
+						<h5>SUSHRUT EYE HOSPITAL</h5>
+						<h6>NH-2, Vipul Khand - IV, Gomti Nagar, Lucknow</h6>
+						<h6>Phone-0522-4313966, 3593685, 8318794965 (Whatsapp)</h6>
+						<h6>Email: pnk_netra@hotmail.com, Website: www.pnkeyecare.com</h6>
+						<h6>Hospital Registration No. RMEE2227313, GST NO. 09AAMCP7394K1ZH</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<br />
+		<div class="card">
+			<div class="card-body">
+				<div style="text-align:center">
+					<h3>Medical Record</h3>
+				</div>
+				@foreach (OPDReportViewModel item in Model)
+				{
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>Patient Id</th>
+								<td>@item.Id</td>
+								<th>Reg.Date</th>
+								<td>@DateTime.Now.ToString("dd/MM/yyyy")</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>Patient Name</th>
+								<td>@item.ApplicationUser.FirstName @item.ApplicationUser.LastName</td>
+								<th>Dob</th>
+								<td>@item.DOB.Value.ToString("dd/MM/yyyy")</td>
+							</tr>
+							<tr>
+								<th>Address</th>
+								<td>@item.Address</td>
+								<th>Contact No</th>
+								<td>@item.ApplicationUser.PhoneNumber</td>
+							</tr>
+						</tbody>
+						<tfoot style="display:none">
+							<tr>
+								<th>Doctor Name</th>
+								<td colspan="3" >@item.Doctor.ApplicationUser.FirstName&nbsp;@item.Doctor.ApplicationUser.LastName</td>
+								@*<th>Consultancy Fee</th>
+								<td>@item.ConsultancyFee</td>*@
+
+							</tr>
+						</tfoot>
+					</table>
+				<br />
+				<div  class="dvbox">
+					<div class="row">
+						<table class="table table-bordered">
+							<tr>
+								<td style="height:845px;width:187px; border-color:black;"></td>
+								
+								<td style="border-color:black;">
+									<p class="mt-5"><b>Intraocular Pressure:</b> NCT Done At 11:56 Right Eye 18 Left Eye 18.</p>
+									<table class="table table-bordered mt-5" style="width:90%; margin-left:30px;">
+										<thead>
+											<tr>
+												<th>Vision</th>
+												<th colspan="2">Distance Vision1</th>
+												<th colspan="2">Near Vision1</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Mark</td>
+												<td>Otto</td>
+												<td>Mark</td>
+												<td>Otto</td>
+												<td>Otto</td>
+											</tr>
+											<tr>
+												<td>Mark</td>
+												<td>Otto</td>
+												<td>Mark</td>
+												<td>Otto</td>
+												<td>Otto</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<td>Mark</td>
+												<td>Otto</td>
+												<td>Mark</td>
+												<td>Otto</td>
+												<td>Otto</td>
+											</tr>
+										</tfoot>
+									</table>
+								</td>
+							</tr>
+							
+								<tr>
+									<td></td>
+									<td class="text-end" style="font-weight:bolder;">
+										Dr.@item.Doctor.ApplicationUser.FirstName &nbsp;@item.Doctor.ApplicationUser.LastName <br />
+										(@item.Doctor.Designation)
+									</td>
+								</tr>
+                                
+						</table>
+
+					</div>
+				</div>
+				}
+
+			</div>
+		</div>
+	</div>
+	<div class="bordered">
+		
+	</div>
+
+</body>
+</html>

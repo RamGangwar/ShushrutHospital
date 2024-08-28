@@ -1,0 +1,154 @@
+﻿@model List<DoctorViewModel>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="header-icon">
+            <i class="pe-7s-box1"></i>
+        </div>
+        <div class="header-title">
+            <h1>Doctor</h1>
+            <small>Doctor List</small>
+            <ol class="breadcrumb hidden-xs">
+                <li><a href="~/Home/Index"><i class="pe-7s-home"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-bd lobidrag">
+                    <div class="panel-heading">
+                        <div class="btn-group">
+                            <a class="btn btn-success" href="~/Doctor/AddDoctor">
+                                <i class="fa fa-plus"></i> Add Doctor
+                            </a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No</th>
+                                        <th>Profile</th>
+                                        <th>Name</th>
+                                        <th>Department</th>
+                                        <th>Email</th>
+                                        <th>Mobile No</th>
+                                        <th>Specialist </th>
+                                        <th>Designation </th>
+                                        <th>Status </th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Any())
+                                    {
+                                        int i = 0;
+                                        string profile = "";
+                                        @foreach (var item in Model)
+                                        {
+                                            profile = @item.ProfilePic != null ? "../doctor/" + @item.ProfilePic : "../assets/dist/img/avatar5.png";
+                                            i++;
+                                            <tr>
+                                                <td>
+                                                    <label>@i</label>
+                                                </td>
+                                                <td><img src="@profile" class="img-circle" alt="Doctor Image" height="50" width="50"></td>
+                                                <td>@item.ApplicationUser!.FirstName&nbsp;@item.ApplicationUser!.LastName</td>
+                                                <td>@item.Department!.Name</td>
+                                                <td>@item.ApplicationUser.Email</td>
+                                                <td>@item.ApplicationUser.PhoneNumber</td>
+                                                <td>@item.Specialist</td>
+                                                <td>@item.Designation</td>
+                                                <td>
+                                                    @switch (item.Status)
+                                                    {
+                                                        case true:
+                                                            <span class="label-success label label-default">Active</span>
+                                                            break;
+                                                        default:
+                                                            <span class="label-default label label-danger">Inactive</span>
+                                                            break;
+                                                    }
+                                                </td>
+                                                <td style="width: 80px;">
+                                                    @*<a href="/Doctor/EditDoctor?Id=@item.Id" target="_blank"><i class="fa fa-pencil"></i></a>*@
+                                                    <a href="/Doctor/EditDoctor?Id=@item.Id" class="btn btn-info btn-xs">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </a>
+                                                    <button type="button" class="btn btn-danger btn-xs" id="btndelete" onclick="DeleteDoctor(@item.Id)">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section> <!-- /.content -->
+
+</div>
+<script>
+    function DeleteDoctor(Id) {
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#00B4B4',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/Doctor/DeleteDoctor',
+                    data: { Id: Id },
+                    datatype: "json",
+                    success: function (data) {
+                        if (data.status == true) {
+                            swal({
+                                title: "Doctor Deleted",
+                                type: "success",
+                                text: data.message,
+                                confirmButtonColor: "#00B4B4",
+                            });
+                            window.location.href = "/Doctor/Index";
+                        }
+                        else {
+                            swal({
+                                title: "Failed to Delete",
+                                type: "error",
+                                text: data.message,
+                                confirmButtonColor: "#00B4B4",
+                            });
+                        }
+
+                    },
+                    error: function (data) {
+                        swal({
+                            title: "Failed to Delete",
+                            type: "error",
+                            text: data.message,
+                            confirmButtonColor: "#00B4B4",
+                        });
+
+                    }
+                });
+            }
+        });
+
+    }
+</script>

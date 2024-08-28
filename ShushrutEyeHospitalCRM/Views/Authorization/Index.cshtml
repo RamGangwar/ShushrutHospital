@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "/Views/Shared/_AccountLayout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/css/jquery_validation.css" />
+<div class="container-center">
+    <div class="panel panel-bd">
+        <div class="panel-heading">
+            <div class="view-header">
+                <div class="header-icon">
+                    <i class="pe-7s-unlock"></i>
+                </div>
+                <div class="header-title">
+                    <h3>Login</h3>
+                    <small><strong>Please enter your credentials to login.</strong></small>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form id="frmLogin">
+                <div class="form-group">
+                    <label class="control-label" for="username">Username</label>
+                    <input type="text" placeholder="example@gmail.com" title="Please enter you email" name="txtemail" id="txtemail" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="password">Password</label>
+                    <input type="password" title="Please enter your password" placeholder="******" required="" value="" name="txtpassword" id="txtpassword" class="form-control">
+                </div>
+                <div class="form-group">
+                    <a href="~/Authorization/ForgotPassword">Forgot Password?</a>
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="button" id="btnSubmit">Login</button>
+                    <button type="button" class="btn btn-warning" id="btnReset">Clear</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script src="~/js/login.js"></script>
+}

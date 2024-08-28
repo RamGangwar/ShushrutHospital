@@ -1,0 +1,774 @@
+﻿@using System.Security.Claims;
+@model PatientViewModel;
+@{
+    ViewData["Title"] = "PatientCheckup";
+    List<PatientHistoryViewModel> patientHistories = (List<PatientHistoryViewModel>)ViewBag.PatientHistory;
+
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/jquery_validation.css" />
+<link href="~/css/jquery-ui.css" rel="stylesheet" />
+<style>
+
+    .letter-head article {
+        width: 210mm;
+        height: auto;
+        margin: 20px auto;
+        position: relative;
+    }
+
+    .letter-head address {
+        text-align: right;
+        padding: 0 15px 0 0;
+        bottom: 8mm;
+        right: 20mm;
+    }
+
+    .letter-head .ccc h5 {
+        margin: 6px 0;
+    }
+
+    .letter-head .ccc, address {
+        color: #000000 !important;
+    }
+
+        .letter-head .ccc h3 {
+            margin: 3px 0;
+        }
+
+    .letter-head h1 {
+        top: 12mm;
+        left: 20mm;
+        width: 221px;
+        height: 149px;
+        font-size: 20px;
+        letter-spacing: 1px;
+        text-align: center;
+        padding: 0px 0;
+        color: white;
+        line-height: 9;
+        text-shadow: 1px 1px 1px black;
+    }
+
+    .letter-head .head {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        padding: 0 4%;
+        background-color: #ededed;
+    }
+    /* Your CSS below here */
+    .letter-head article {
+        background-color: #fff;
+        border-top: 5px solid #b30000;
+        border-bottom: 5px solid #b30000;
+    }
+
+    .letter-head h1 {
+        box-shadow: 5px 5px 1px rgba(0,0,0,0.7);
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: #31349d;
+    }
+
+    .letter-head .contant {
+        padding: 30px 60px;
+    }
+
+    .head img {
+        padding: 50px 0 50px 0;
+    }
+
+    tbody th {
+        font-weight: 600;
+    }
+</style>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
+<script src="~/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="header-icon">
+            <i class="pe-7s-note2"></i>
+        </div>
+        <div class="header-title">
+            <h1>Patient Checkup Details</h1>
+            <small>Patient Checkup Details</small>
+            <ol class="breadcrumb hidden-xs">
+                <li><a href="~/Home/Index"><i class="pe-7s-home"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- Form controls -->
+            <div class="col-sm-12">
+                @*  <div class="panel panel-bd lobidrag">
+                <div class="panel-heading">
+                </div>
+                <div class="panel-body"> *@
+                <div class="form-group">
+                    <input type="hidden" id="PatientId" name="PatientId" value="@Model.Id" class="form-control" />
+                </div>
+
+
+
+                <div class="letter-head">
+                    <article>
+                        <div style="width:100%">
+                            <table class="table" style="text-align:center;border:none;">
+                                <tr>
+                                    <td style="vertical-align:middle; border:none;padding:0;"><img src="~/images/logobig.jpg" alt="" style="width: 100%; height:70px"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border:none;padding:0;">
+                                        <h5><b>Address-</b>Plot no 5 , 1st Floor, Ishwarpuri, Sector 12 Indra Nagar, Lucknow-226016 <b>Phone-</b>9026353723 (Whatsapp)</h5>
+                                    </td>
+                                </tr>
+
+                            </table>
+
+
+                        </div>
+                        @*<div class="head">
+                        <img src="~/images/logo.png" alt="" style="width: 200px;">
+                        <div class="ccc ms-auto pr-3 text-center text-white">
+                        <h3>Sushrut Eye Hospital<br></h3>
+                        <h5>Plot no 5 , 1st Floor, Ishwarpuri, Sector 12 Indra Nagar, Lucknow-226016</h5>
+                        <b>Phone-</b>9026353723 (Whatsapp)<br>
+                        </div>
+                        </div>*@
+                        <div class="contant" style="padding: 1px 4px;">
+                            <div class="tables-container">
+                                @{
+                                    var age = Convert.ToUInt32(System.DateTime.Today.Year) - Convert.ToInt32(Model.DOB!.Value.Year);
+                                }
+                                @{
+                                    var gender = Model.Gender == "1" ? "Male" : "Female";
+                                }
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th colspan="4" class="text-center">Patients Details</th>
+                                    </tr>
+                                    <tr>
+                                        <th>MRD No</th>
+                                        <td> @Model.MRDNo</td>
+                                        <th>Hospital Visit</th>
+                                        <td>@ViewBag.VisitNo</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <td> @Model.ApplicationUser!.FirstName&nbsp;@Model.ApplicationUser.LastName</td>
+                                        <th>Mobile</th>
+                                        <td>@Model.ApplicationUser.PhoneNumber</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address</th>
+                                        <td>@Model.Address</td>
+                                        <th>Age/Gender</th>
+                                        <td>@age Yrs/@gender</td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <div class="tables-container">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th colspan="4" class="text-center">Current Eye Problem</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @{
+                                                var prob = Model.Problem == "Other" ? Model.OtherProblem : Model.Problem;
+                                            }
+                                            @prob
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            @if (User.FindFirstValue(ClaimTypes.Role) == CommonHelper.Refraction)
+                            {
+                                <form id="frmPatientHistory">
+                                    <div class="tables-container">
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <th class="text-center">Vision</th>
+                                                <th colspan="2" class="text-center">Distance Vision</th>
+                                                <th colspan="2" class="text-center">Near Vision</th>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td class="column text-center">Right Eye</td>
+                                                <td class="column text-center">Left Eye</td>
+                                                <td class="column text-center">Right Eye</td>
+                                                <td class="column text-center">Left Eye</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="column">UnAided</td>
+                                                <td class="column"><input type="text" id="DistanceVisionREUnAided" name="DistanceVisionREUnAided" class="form-control" /></td>
+                                                <td class="column"><input type="text" id="DistanceVisionLEUnAided" name="DistanceVisionLEUnAided" class="form-control" /></td>
+                                                <td class="column"><input type="text" id="NearVisionREUnAided" name="NearVisionREUnAided" class="form-control" /></td>
+                                                <td class="column"> <input type="text" id="NearVisionLEUnAided" name="NearVisionLEUnAided" class="form-control" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="column">With Glass</td>
+                                                <td class="column"><input type="text" id="DistanceVisionREWithGlass" name="DistanceVisionREWithGlass" class="form-control" /></td>
+                                                <td class="column"><input type="text" id="DistanceVisionLEWithGlass" name="DistanceVisionLEWithGlass" class="form-control" /></td>
+                                                <td class="column"><input type="text" id="NearVisionREWithGlass" name="NearVisionREWithGlass" class="form-control" /></td>
+                                                <td class="column"> <input type="text" id="NearVisionLEWithGlass" name="NearVisionLEWithGlass" class="form-control" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="column">With Pinhole</td>
+                                                <td class="column"><input type="text" id="DistanceVisionREWithPinhole" name="DistanceVisionREWithPinhole" class="form-control" /></td>
+                                                <td class="column"> <input type="text" id="DistanceVisionLEWithPinhole" name="DistanceVisionLEWithPinhole" class="form-control" /></td>
+                                                <td class="column"> <input type="text" id="NearVisionREWithPinhole" name="NearVisionREWithPinhole" class="form-control" /></td>
+                                                <td class="column"> <input type="text" id="NearVisionLEWithPinhole" name="NearVisionLEWithPinhole" class="form-control" /></td>
+                                            </tr>
+
+                                        </table>
+
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <td class="text-center">Method name</td>
+                                                <td class="text-center">IOP Time</td>
+                                                <td class="text-center">IOP RE</td>
+                                                <td class="text-center">IOPLE</td>
+                                                <td class="text-center">P RE</td>
+                                                <td class="text-center">P LE</td>
+                                                <td class="text-center">REMARKS</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="column"><input type="text" id="MethodName" name="MethodName" class="form-control" /></td>
+                                                <td class="column"> <input type="text" id="IOPTime" name="IOPTime" class="form-control" /></td>
+                                                <td class="column"> <input type="text" id="IOPRE" name="IOPRE" class="form-control" /></td>
+                                                <td class="column"> <input type="text" id="IOPLE" name="IOPLE" class="form-control" /></td>
+                                                <td class="column"><input type="text" id="PRE" name="PRE" class="form-control" /></td>
+                                                <td class="column"> <input type="text" id="PLE" name="PLE" class="form-control" /></td>
+                                                <td class="column"> <input type="text" id="Remarks" name="Remarks" class="form-control" /></td>
+                                            </tr>
+                                        </table>
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <td>Adv. Glassess</td>
+                                                <td class="column text-center">Right Eye</td>
+                                                <td class="column text-center">Left Eye</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="column"></td>
+                                                <td class="column">
+                                                    <table class="table table-bordered" style="margin-bottom: 0px;">
+                                                        <tr>
+                                                            <td class="text-center">Sph</td>
+                                                            <td class="text-center">Cy</td>
+                                                            <td class="text-center">Axis</td>
+                                                            <td class="text-center">Prism</td>
+                                                            <td class="text-center">V/A</td>
+                                                            <td class="text-center">N/V</td>
+                                                        </tr>
+
+                                                    </table>
+                                                </td>
+                                                <td class="column">
+                                                    <table class="table table-bordered" style="margin-bottom: 0px;">
+                                                        <tr>
+                                                            <td class="text-center">Sph</td>
+                                                            <td class="text-center">Cy</td>
+                                                            <td class="text-center">Axis</td>
+                                                            <td class="text-center">Prism</td>
+                                                            <td class="text-center">V/A</td>
+                                                            <td class="text-center">N/V</td>
+                                                        </tr>
+
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="column">Distance</td>
+                                                <td class="column">
+                                                    <table class="table table-bordered" style="margin-bottom: 0px;">
+                                                        <tr>
+                                                            <td class="text-center"><input type="text" id="DistanceRE_Sph" name="DistanceRE_Sph" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="DistanceRE_Cy" name="DistanceRE_Cy" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="DistanceRE_Axis" name="DistanceRE_Axis" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="DistanceRE_Prism" name="DistanceRE_Prism" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="DistanceRE_VA" name="DistanceRE_VA" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="DistanceRE_NV" name="DistanceRE_NV" class="form-control" /></td>
+                                                        </tr>
+
+                                                    </table>
+                                                </td>
+                                                <td class="column">
+                                                    <table class="table table-bordered" style="margin-bottom: 0px;">
+                                                        <tr>
+                                                            <td class="text-center"><input type="text" id="DistanceLE_Sph" name="DistanceLE_Sph" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="DistanceLE_Cy" name="DistanceLE_Cy" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="DistanceLE_Axis" name="DistanceLE_Axis" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="DistanceLE_Prism" name="DistanceLE_Prism" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="DistanceLE_VA" name="DistanceLE_VA" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="DistanceLE_NV" name="DistanceLE_NV" class="form-control" /></td>
+                                                        </tr>
+
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="column">Add</td>
+                                                <td class="column">
+                                                    <table class="table table-bordered" style="margin-bottom: 0px;">
+                                                        <tr>
+                                                            <td class="text-center"><input type="text" id="AddRE_Sph" name="AddRE_Sph" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="AddRE_Cy" name="AddRE_Cy" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="AddRE_Axis" name="AddRE_Axis" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="AddRE_Prism" name="AddRE_Prism" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="AddRE_VA" name="AddRE_VA" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="AddRE_NV" name="AddRE_NV" class="form-control" /></td>
+                                                        </tr>
+
+                                                    </table>
+                                                </td>
+                                                <td class="column">
+                                                    <table class="table table-bordered" style="margin-bottom: 0px;">
+                                                        <tr>
+                                                            <td class="text-center"><input type="text" id="AddLE_Sph" name="AddLE_Sph" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="AddLE_Cy" name="AddLE_Cy" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="AddLE_Axis" name="AddLE_Axis" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="AddLE_Prism" name="AddLE_Prism" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="AddLE_VA" name="AddLE_VA" class="form-control" /></td>
+                                                            <td class="text-center"><input type="text" id="AddLE_NV" name="AddLE_NV" class="form-control" /></td>
+                                                        </tr>
+
+                                                    </table>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 reset-button">
+                                            <button type="button" id="btnSave" class="btn btn-success">Save</button>
+                                            <button type="button" id="btnReset" class="btn btn-warning">Reset</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            }
+                            else
+                            {
+                                foreach (var item in patientHistories)
+                                {
+                                    <div class="tables-container">
+                                        @if (!string.IsNullOrEmpty(item.DistanceVisionREWithGlass) ||
+                                       !string.IsNullOrEmpty(item.DistanceVisionREWithPinhole) ||
+                                       !string.IsNullOrEmpty(item.DistanceVisionLEWithGlass) ||
+                                       !string.IsNullOrEmpty(item.DistanceVisionLEWithPinhole) ||
+                                       !string.IsNullOrEmpty(item.DistanceVisionREUnAided) ||
+                                       !string.IsNullOrEmpty(item.DistanceVisionLEUnAided) ||
+                                       !string.IsNullOrEmpty(item.NearVisionREUnAided) ||
+                                       !string.IsNullOrEmpty(item.NearVisionLEUnAided) ||
+                                       !string.IsNullOrEmpty(item.NearVisionREWithGlass) ||
+                                       !string.IsNullOrEmpty(item.NearVisionREWithPinhole) ||
+                                       !string.IsNullOrEmpty(item.NearVisionLEWithGlass) ||
+                                       !string.IsNullOrEmpty(item.NearVisionLEWithPinhole))
+                                        {
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center">Vision</th>
+                                                        <th colspan="2" class="text-center">Distance Vision</th>
+                                                        <th colspan="2" class="text-center">Near Vision</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td></td>
+                                                        <th class="column text-center">Right Eye</th>
+                                                        <th class="column text-center">Left Eye</th>
+                                                        <th class="column text-center">Right Eye</th>
+                                                        <th class="column text-center">Left Eye</th>
+                                                    </tr>
+                                                    @if (!string.IsNullOrEmpty(item.DistanceVisionREUnAided) ||
+                                                   !string.IsNullOrEmpty(item.DistanceVisionLEUnAided) ||
+                                                   !string.IsNullOrEmpty(item.NearVisionREUnAided) ||
+                                                   !string.IsNullOrEmpty(item.NearVisionLEUnAided))
+                                                    {
+                                                        <tr>
+                                                            <th class="column">UnAided</th>
+                                                            <td class="column">@item.DistanceVisionREUnAided</td>
+                                                            <td class="column">@item.DistanceVisionLEUnAided</td>
+                                                            <td class="column">@item.NearVisionREUnAided</td>
+                                                            <td class="column">@item.NearVisionLEUnAided</td>
+                                                        </tr>
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(item.DistanceVisionREWithGlass) ||
+                                                   !string.IsNullOrEmpty(item.DistanceVisionLEWithGlass) ||
+                                                   !string.IsNullOrEmpty(item.NearVisionREWithGlass) ||
+                                                   !string.IsNullOrEmpty(item.NearVisionLEWithGlass))
+                                                    {
+                                                        <tr>
+                                                            <th class="column">With Glass</th>
+                                                            <td class="column">@item.DistanceVisionREWithGlass</td>
+                                                            <td class="column">@item.DistanceVisionLEWithGlass</td>
+                                                            <td class="column">@item.NearVisionREWithGlass</td>
+                                                            <td class="column">@item.NearVisionLEWithGlass</td>
+                                                        </tr>
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(item.DistanceVisionREWithPinhole) ||
+                                                   !string.IsNullOrEmpty(item.DistanceVisionLEWithPinhole) ||
+                                                   !string.IsNullOrEmpty(item.NearVisionREWithPinhole) ||
+                                                   !string.IsNullOrEmpty(item.NearVisionLEWithPinhole))
+                                                    {
+                                                        <tr>
+                                                            <th class="column">With Pinhole</th>
+                                                            <td class="column">@item.DistanceVisionREWithPinhole</td>
+                                                            <td class="column">@item.DistanceVisionLEWithPinhole</td>
+                                                            <td class="column">@item.NearVisionREWithPinhole</td>
+                                                            <td class="column">@item.NearVisionLEWithPinhole</td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        }
+                                        @if (!string.IsNullOrEmpty(item.MethodName) ||
+                                       !string.IsNullOrEmpty(item.IOPTime) ||
+                                       !string.IsNullOrEmpty(item.IOPRE) ||
+                                       !string.IsNullOrEmpty(item.IOPLE) ||
+                                       !string.IsNullOrEmpty(item.PRE) ||
+                                       !string.IsNullOrEmpty(item.PLE) ||
+                                       !string.IsNullOrEmpty(item.Remarks))
+                                        {
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <th class="text-center">Method name</th>
+                                                        <th class="text-center">IOP Time</th>
+                                                        <th class="text-center">IOP RE</th>
+                                                        <th class="text-center">IOPLE</th>
+                                                        <th class="text-center">P RE</th>
+                                                        <th class="text-center">P LE</th>
+                                                        <th class="text-center">REMARKS</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="column">@item.MethodName</td>
+                                                        <td class="column">@item.IOPTime</td>
+                                                        <td class="column">@item.IOPRE</td>
+                                                        <td class="column">@item.IOPLE</td>
+                                                        <td class="column">@item.PRE</td>
+                                                        <td class="column">@item.PLE</td>
+                                                        <td class="column">@item.Remarks</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        }
+                                        @{
+                                            item.PatientAdvGlasses = ViewBag.AdvGlasses;
+
+                                            if (item.PatientAdvGlasses != null && (!string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceRE_Sph) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceRE_Cy) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceRE_Axis) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceRE_Prism) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceRE_VA) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceRE_NV) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceLE_Sph) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceLE_Cy) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceLE_Axis) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceLE_Prism) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceLE_VA) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceLE_NV) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddRE_Sph) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddRE_Cy) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddRE_Axis) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddRE_Prism) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddRE_VA) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddRE_NV) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddLE_Sph) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddLE_Cy) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddLE_Axis) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddLE_Prism) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddLE_VA) ||
+                                            !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddLE_NV)))
+
+                                            {
+                                                <table class="table table-bordered" style="margin-bottom: 0px;">
+                                                    <tr>
+                                                        <td>Adv.Glasses</td>
+                                                        <td class="column text-center">Right Eye</td>
+                                                        <td class="column text-center">Left Eye</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="column"></td>
+                                                        <td class="column">
+                                                            <table class="table table-bordered" style="margin-bottom: 0px;">
+                                                                <tr>
+                                                                    <td class="text-center">Sph</td>
+                                                                    <td class="text-center">Cy</td>
+                                                                    <td class="text-center">Axis</td>
+                                                                    <td class="text-center">Prism</td>
+                                                                    <td class="text-center">V/A</td>
+                                                                    <td class="text-center">N/V</td>
+                                                                </tr>
+
+                                                            </table>
+                                                        </td>
+                                                        <td class="column">
+                                                            <table class="table table-bordered" style="margin-bottom: 0px;">
+                                                                <tr>
+                                                                    <td class="text-center">Sph</td>
+                                                                    <td class="text-center">Cy</td>
+                                                                    <td class="text-center">Axis</td>
+                                                                    <td class="text-center">Prism</td>
+                                                                    <td class="text-center">V/A</td>
+                                                                    <td class="text-center">N/V</td>
+                                                                </tr>
+
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    @if (!string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceRE_Sph) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceRE_Cy) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceRE_Axis) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceRE_Prism) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceRE_VA) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceRE_NV) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceLE_Sph) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceLE_Cy) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceLE_Axis) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceLE_Prism) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceLE_VA) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.DistanceLE_NV))
+                                                    {
+                                                        <tr>
+                                                            <td class="column">Distance</td>
+                                                            <td class="column">
+                                                                <table class="table table-bordered" style="margin-bottom: 0px;">
+                                                                    <tr>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.DistanceRE_Sph</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.DistanceRE_Cy</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.DistanceRE_Axis</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.DistanceRE_Prism</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.DistanceRE_VA</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.DistanceRE_NV</td>
+                                                                    </tr>
+
+                                                                </table>
+                                                            </td>
+                                                            <td class="column">
+                                                                <table class="table table-bordered" style="margin-bottom: 0px;">
+                                                                    <tr>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.DistanceLE_Sph</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.DistanceLE_Cy</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.DistanceLE_Axis</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.DistanceLE_Prism</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.DistanceLE_VA</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.DistanceLE_NV</td>
+                                                                    </tr>
+
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(item.PatientAdvGlasses!.AddRE_Sph) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddRE_Cy) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddRE_Axis) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddRE_Prism) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddRE_VA) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddRE_NV) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddLE_Sph) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddLE_Cy) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddLE_Axis) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddLE_Prism) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddLE_VA) ||
+                                               !string.IsNullOrEmpty(item.PatientAdvGlasses!.AddLE_NV))
+                                                    {
+                                                        <tr>
+                                                            <td class="column">Add</td>
+                                                            <td class="column">
+                                                                <table class="table table-bordered" style="margin-bottom: 0px;">
+                                                                    <tr>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.AddRE_Sph</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.AddRE_Cy</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.AddRE_Axis</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.AddRE_Prism</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.AddRE_VA</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.AddRE_NV</td>
+                                                                    </tr>
+
+                                                                </table>
+                                                            </td>
+                                                            <td class="column">
+                                                                <table class="table table-bordered" style="margin-bottom: 0px;">
+                                                                    <tr>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.AddLE_Sph</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.AddLE_Cy</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.AddLE_Axis</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.AddLE_Prism</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.AddLE_VA</td>
+                                                                        <td class="text-center">@item.PatientAdvGlasses!.AddLE_NV</td>
+                                                                    </tr>
+
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </table>
+                                            }
+                                        }
+                                    </div>
+                                }
+                                <hr />
+                                <form id="frmPatientHistory">
+
+                                    <div class="row">
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label">Examination Detail</label>
+                                            <table class="table table-bordered" style="margin-bottom: 0px;" id="tblExaminationDetail">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center">Finding Name</th>
+                                                        <th class="text-center">Right Eye</th>
+                                                        <th class="text-center">Left Eye</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-center"><input type="text" id="txtFindingName_1" name="txtFindingName_1" class="form-control" /></td>
+                                                        <td class="text-center"><input type="text" id="txtRightEye_1" name="txtRightEye_1" class="form-control" /></td>
+                                                        <td class="text-center"><input type="text" id="txtLeftEye_1" name="txtLeftEye_1" class="form-control" /></td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+
+                                                        <td colspan="3" style="text-align:right;"><button type="button" id="btnAddLine" class="btn btn-danger">Add</button></td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label">Plan of Care</label>
+                                            <textarea type="text" id="Prescriptions" name="Prescriptions" class="form-control" rows="4"></textarea>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label">Rx</label>
+                                            <input type="text" id="txtSuggetion" name="txtSuggetion" class="form-control" placeholder="Search medicine" />
+                                            <textarea type="text" id="DocAdvice" name="DocAdvice" class="form-control" rows="10"></textarea>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <label class="control-label">Diagnosis</label>
+                                            <textarea type="text" id="Diagnosis" name="Diagnosis" class="form-control" rows="10"></textarea>
+                                        </div>
+                                        <div class="form-group col-sm-3">
+                                            <label>Required Counseling<span class="text-danger">*</span></label><br>
+                                            <div class="form-control">
+                                                <label class="radio-inline"><input type="radio" name="IsCounseling" value="1">Yes</label>
+                                                <label class="radio-inline"><input type="radio" name="IsCounseling" value="0" checked="checked">No</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 reset-button">
+                                            <button type="button" id="btnSubmit" class="btn btn-success">Save</button>
+                                            <button type="button" id="btnReset" class="btn btn-warning">Reset</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            }
+                        </div>
+                        <address>
+                            <p>Sushrut Eye Hospital</p>
+                            <p>
+                                Plot no 5 , 1st Floor, Ishwarpuri, Sector 12 Indra Nagar, Lucknow-226016<br>
+                            </p>
+                        </address>
+                    </article>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+    </section> <!-- /.content -->
+</div>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(document).ready(function () {
+        //$("#txtDischargeDetail").jqte();
+        tinymce.init({
+            selector: 'textarea',
+            plugins: [
+                'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview',
+                'anchor', 'pagebreak',
+                'searchreplace', 'wordcount', 'visualblocks', 'visualchars', 'code',
+                'fullscreen', 'insertdatetime',
+                'media', 'table', 'emoticons', 'template', 'help'
+            ],
+            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright alignjustify | ' +
+                'bullist numlist outdent indent |forecolor',
+            //toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | ' +                'bullist numlist outdent indent |                 link image | print preview media fullscreen | ' +                'forecolor backcolor emoticons | help',
+            menubar: false,//'file edit view insert format tools table help',
+            toolbar_mode: 'floating',
+            height: 400,
+
+        });
+
+
+    });
+
+    $('#txtSuggetion').autocomplete({
+        source: function (request, response) {
+            var autocompleteUrl = '/SetUp/SearchMedicine';
+            $.ajax({
+                url: autocompleteUrl,
+                type: 'GET',
+                cache: false,
+                data: { prefix: request.term },
+                dataType: 'json',
+                success: function (json) {
+                    $("#overlay").hide();
+                    // call autocomplete callback method with results
+                    response($.map(json, function (data, id) {
+                        return {
+                            label: data.medicineName,
+                            value: data.medicineName
+                        };
+                    }));
+                },
+                error: function (xmlHttpRequest, textStatus, errorThrown) {
+                    debugger;
+                    $("#overlay").hide();
+                    console.log('some error occured', textStatus, errorThrown);
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            $("#overlay").hide();
+            $('#txtSuggetion').val(ui.item.label);
+            return false;
+        }
+    });
+    //$('#DocAdvice').on("focusin", function () {
+    //    tinymce.get('DocAdvice').setContent('<p>&nbsp;Rx</p>');
+    //}
+
+    $('#txtSuggetion').on("change", function () {
+        debugger;
+
+        var editorDocAdvice = tinymce.get('DocAdvice');
+        var contentDocAdvice = editorDocAdvice.getContent();
+        var txtvalue = '\n<p>&nbsp;' + $('#txtSuggetion').val() + '</p>';
+        contentDocAdvice = contentDocAdvice + txtvalue;
+        //$('#DocAdvice').val(contentDocAdvice);
+        tinymce.get('DocAdvice').setContent(contentDocAdvice);
+        $('#txtSuggetion').val('');
+    });
+</script>
+@section scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript" src="~/js/patienthistory.js"></script>
+}

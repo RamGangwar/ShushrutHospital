@@ -1,0 +1,470 @@
+﻿@using System.Security.Claims;
+@model Tuple<PatientViewModel,PatientCounselingViewModel>
+@{
+    ViewData["Title"] = "Patient Counseling";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counselling</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    @*<link href="~/css/bootstrap.css" rel="stylesheet">*@
+    <link href="~/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    @* <style>
+    .navbar-brand img {
+    width: 100%;
+    }
+
+    .header {
+    box-shadow: 0 0 1px 1px #cdcdcd;
+    background-color: #fff;
+    }
+
+    /* .sidebar {
+    position: fixed;
+    top: 11%;
+    width: 250px;
+    box-shadow: 0 3px 4px 1px #000;
+    height: 100vh;z-index: -1;
+    } */
+
+    /* .contant {
+    height: 2500px;
+    margin-top: 78px;
+    margin-left: 254px;
+    padding: 25px;
+    border: 1px solid #eee;
+    background-color: #ecf2ff;
+    } */
+    a.nav-link {
+    color: #000000;
+    padding: 0 21px;
+    }
+
+    .detial_list {
+    padding-left: 5px;
+    }
+
+    .detial_list li {
+    list-style: none;
+    padding: 5px 5px;
+    font-size: 18px;
+    background-color: #eee;
+    margin-bottom: 3px;
+    }
+
+    .detail {
+    display: flex;
+    padding: 8px 0;
+    justify-content: space-between;
+    }
+
+    .detail span {
+    width: 41%;
+    }
+
+    .payment_status {
+    text-align: right;
+    padding-right: 9%;
+    padding-top: 2%;
+    background-color: #b8dcff36;
+    padding-bottom: 30px;
+    }
+
+    .uder_name h3.apper {
+    background-color: #2d5c8a;
+    padding: 10px;
+    color: #fff;
+    }
+
+    .payment_status h3 {
+    color: #000;
+    }
+
+    .payment_status h1 {
+    color: #00541c;
+    font-weight: bold;
+    }
+
+    .detail strong {
+    width: 41%;
+    }
+
+    .apmt {
+    background-color: #2d5c8a;
+    color: #fff;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    }
+
+    @@media screen and (max-width: 580px) {
+    .sidebar {
+    display: none;
+    }
+
+    .contant {
+    margin-left: 0px !important;
+    }
+
+    .na_v {
+    background-color: #000;
+    }
+
+    .na_v li a.nav-link {
+    color: #fff !important;
+    padding: 8px;
+    /* background-color: #eeeeeea1; */
+    border-bottom: 1px solid #eee;
+    }
+    }
+
+    .list {
+    display: flex;
+    width: 100%;
+    }
+
+    .list .detail {
+    width: 49%;
+    }
+
+    .sign {
+    width: 100%;
+    text-align: center;
+    }
+
+    .sign p {
+    font-weight: 700;
+    }
+
+    .sign p small {
+    font-size: 14px;
+    }
+
+    .n_detial {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 13px;
+    }
+
+    .tope .pl-3 {
+    padding-left: 14px;
+    }
+
+    h3 {
+    font-weight: 600;
+    }
+    </style>*@
+</head>
+
+<body>
+    <!-- <header class="  header fixed-top"> -->
+    <header class="  header  ">
+        <div style="width:100%">
+
+            <table class="table" style="text-align:center;border:none;">
+                <tr>
+                    <td style="vertical-align:middle; border:none;padding:0;"><img src="~/images/logobig.jpg" alt="" style="width: 100%; height:70px"></td>
+                    
+                </tr>
+                <tr>
+                    <td style="border:none;padding:0;">
+                        @*<h3>Sushrut Eye Hospital<br></h3>*@
+                        <h5><b>Address-</b>Plot no 5 , 1st Floor, Ishwarpuri, Sector 12 Indra Nagar, Lucknow-226016 <b>Phone-</b>9026353723 (Whatsapp)</h5>
+                    </td>
+                </tr>
+
+            </table>
+
+
+        </div>
+    </header>
+    <!-- end-header -->
+
+
+    <div class="contant">
+
+        <section>
+            <div class="container" style="    width: 100%;">
+                <div class="row">
+                    <!-- end=cp;-4 -->
+                    <div class="col-md-12">
+                        <div class="user_profile_c card p-3 mt-3">
+                            <div class="uder_name">
+                                <div class="User_detail">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="list" style="display: flex;    width: 100%;">
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <span style="width:34%;display:inline-block">NAME </span> :      @Model.Item1.ApplicationUser!.FirstName @Model.Item1.ApplicationUser!.LastName
+                                                </div>
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <span style="width:34%;display:inline-block">Age/Sex </span> :
+                                                    @{
+                                                        var age = Convert.ToUInt32(System.DateTime.Today.Year) - Convert.ToInt32(Model.Item1.DOB!.Value.Year);
+                                                    }
+                                                    @{
+                                                        var gender = Model.Item1.Gender == "1" ? "Male" : "Female";
+                                                    }
+
+                                                    @age Yrs / @gender
+
+                                                </div>
+
+                                            </div>
+                                            <div class="list" style="display: flex;    width: 100%;">
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <span style="width:34%;display:inline-block"> MR No. </span> :        @Model.Item1.MRDNo
+                                                </div>
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <span style="width:34%;display:inline-block">Booking Date </span> :
+                                                    @{
+                                                        var date = string.IsNullOrEmpty(Model.Item2.BookingDate!.ToString()) ? "" : Convert.ToDateTime(Model.Item2.BookingDate).ToString("dd/MM/yyyy");
+                                                    }
+                                                    @date
+
+                                                </div>
+                                            </div>
+                                            <div class="list" style="display: flex;    width: 100%;">
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <span style="width:34%;display:inline-block"> Diagnosis </span> :        @Model.Item2.Diagnosis
+                                                </div>
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <span style="width:34%;display:inline-block">Surgery Date </span> :
+                                                    @{
+                                                        var surgry = string.IsNullOrEmpty(Model.Item2.SurgeryDateTime!.ToString()) ? "" : Convert.ToDateTime(Model.Item2.SurgeryDateTime).ToString("dd/MM/yyyy");
+                                                    }
+                                                    @surgry
+
+                                                </div>
+                                            </div>
+                                            <div class="list" style="display: flex;    width: 100%;">
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <span style="width:34%;display:inline-block"> Eye to be Operated </span> :        @Model.Item2.OperatedEye
+                                                </div>
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <span style="width:34%;display:inline-block">Doctor </span> :      @Model.Item2.DoctorName
+                                                </div>
+                                            </div>
+                                            <div class="list" style="display: flex;     gap: 15px;   width: 100%;">
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <span style="width:34%;display:inline-block"> Procedure Name </span> :        @Model.Item2.ProcedureName
+                                                </div>
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <span style="width:34%;display:inline-block">Package Name </span> :      @Model.Item2.PackageName
+                                                </div>
+                                            </div>
+                                            <div class="list" style="display: flex;    width: 100%;">
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <span style="width:34%;display:inline-block"> Additional Procedure</span> :        @Model.Item2.AdditionalProcedure
+                                                </div>
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <span style="width:34%;display:inline-block">Approx Charges</span> :      @Model.Item2.ApproxCharge
+                                                </div>
+                                            </div>
+                                            <div class="list" style="display: flex;    width: 100%;">
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <span style="width:34%;display:inline-block">Anesthesia Type</span> :        @Model.Item2.AnesthesiaType
+                                                </div>
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <span style="width:34%;display:inline-block">Patient/Party</span> :      @Model.Item2.PatientOrParty
+                                                </div>
+                                            </div>
+                                            <div class="list" style="display: flex;    width: 100%;">
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <span style="width:34%;display:inline-block">Counsellor Remark</span> :        @Model.Item2.Remarks
+                                                </div>
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <span style="width:34%;display:inline-block">Prepared By</span> :      @Model.Item2.CounsellorName
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <br />
+                                            <br />
+                                            <div class="list" style="display: flex;    width: 100%;">
+                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <div class="sign" style="padding: 35px 0;">
+                                                        @*<img src="~/images/sign.png" style="  width: 25%; ">*@
+                                                        <p class="">Signature of Counsellor</p>
+                                                        <p>
+                                                            <small>
+                                                                @System.DateTime.Now.ToString("dd/MM/yyyy hh:mm tt")
+                                                            </small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="detail" style="display: flex;float:right; padding: 8px 0;width:49%; justify-content: space-between;">
+                                                    <div class="sign" style="padding: 35px 0;">
+                                                        @*<img src="~/images/sign.png" style="  width: 25%; ">*@
+                                                        <p class="">Thumb Impression / Signature of Patient</p>
+                                                        <p>
+                                                            <small>
+                                                                @System.DateTime.Now.ToString("dd/MM/yyyy hh:mm tt")
+                                                            </small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="text-center py-3" style="text-decoration:underline;">PLEASE BRING THIS CARD ALONG WITH YOUR FILES & REPORTS ON THE DAY OF SURGERY</div>
+                                            <div class="row" style=" padding-left:20px">
+
+                                                <table style="text-align:left;border:none; width:100%">
+                                                    <tr>
+                                                        <td style="text-align:center;border:none;"><h4 style="text-decoration:underline;">Investigation Ordered</h4></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border:none; width:100% ">
+                                                            <div class="list" style="display: flex;    width: 100%;">
+                                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:30%; ">
+                                                                    <span style="width:65%;display:inline-block">1. Blood Sugar F/PP/R</span>      <span>[ ]</span>
+                                                                </div>
+                                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:35%; ">
+                                                                    <span style="width:65%;display:inline-block">2. Urin : R/M</span>      <span>[ ]</span>
+
+                                                                </div>
+                                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:30%; ">
+                                                                    <span style="width:65%;display:inline-block">3. Lipid Profile</span>     <span>[ ]</span>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="list" style="display: flex;    width: 100%;">
+                                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:30%; ">
+                                                                    <span style="width:65%;display:inline-block">4. Elisa for HIV</span>      <span>[ ]</span>
+                                                                </div>
+                                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:35%; ">
+                                                                    <span style="width:65%;display:inline-block">5. HbsAg</span>      <span>[ ]</span>
+
+                                                                </div>
+
+
+                                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:30%; ">
+                                                                    <span style="width:65%;display:inline-block">6. HbA1c</span>      <span>[ ]</span>
+
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="list" style="display: flex;    width: 100%;">
+                                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:30%; ">
+                                                                    <span style="width:65%;display:inline-block">7. HCV</span>     <span>[ ]</span>
+                                                                </div>
+                                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:35%; ">
+                                                                    <span style="width:65%;display:inline-block">8. Serum Creatinin/Blood Urea</span>      <span>[ ]</span>
+                                                                </div>
+                                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:30%; ">
+                                                                    <span style="width:65%;display:inline-block">9. Covid - RTPCR @*(Patient/Attandant)*@</span>     <span>[ ]</span>
+                                                                </div>
+
+
+
+                                                            </div>
+                                                            <div class="list" style="display: flex;    width: 100%;">
+                                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:81%; ">
+                                                                    <span style="width:65%;display:inline-block">10. Hb/TLC/DLC/PC,PT/ESR(C),BT,CT,CPK</span>      <span>[ ]</span>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="list" style="display: flex;    width: 100%;">
+
+                                                                <div class="detail" style="display: flex;float:left; padding: 8px 0;width:81%; ">
+                                                                    <span style="width:65%;display:inline-block">11. Physician/Peadiatrician/Anesthetist Clearance for Surgery with BP &amp; ECG</span>      <span>[ ]</span>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </td>
+
+
+                                                    </tr>
+
+                                                </table>
+
+
+                                            </div>
+
+
+
+                                            <div class="row" style=" padding-left:20px;">
+
+
+                                                <table style="text-align:left;border:none; width:100%">
+                                                    <tr>
+                                                        <td colspan="2" style="text-align:center;border:none;"><h4 style="text-decoration:underline;">Instruction for Patient</h4></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border:none; width:75% ">
+                                                            <p >1. <span>Use MOXISHIELD/KETOMAR/ MOXICIP/ MESSEY/ZYMAR / KETOFLOX/XYBREX Eye Drop <br />Put one drop 4 times daily in eye to be operated for 1 day prior-to-operation</span></p>
+                                                            <p >2. <span>Take a Light Dinner on Night before Operation</span></p>
+                                                                  
+                                                            <p >3. <span>Tab. CIPLOX (500mg)</span></p>
+                                                            <p >5. <span>Full Breakfast on Morning / Lunch on Operation day before taking medicines</span></p>
+                                                            <p >6. <span>Nothing by mouth after ...............am/pm on ..................</span></p>
+                                                            <p >7. <span>Dilate RE/LE with Tropicacyl Plus/Cyclogyl Eye Drops (In Hosptial Only By Hospital Staff)</span></p>
+                                                            <p >8. <span>STOP BLOOD THINNER MEDICINE/ECOSPRIN FROM</span></p>
+                                                            <p >9. <span>Drug Allergy ....................</span></p>
+                                                        </td>
+                                                        <td style="border:none; width:25%">
+                                                            <p > <span>1 Tab. after dinner on..............</span></p>
+                                                            <p > <span>1 Tab. after breakfast on..............</span></p>
+                                                            <p > <span>1 Tab. after dinner on..............</span></p>
+                                                            <p > <span>1 Tab. after dinner on..............</span></p>
+                                                        </td>
+
+                                                    </tr>
+
+                                                </table>
+
+                                            </div>
+
+                                            <div class="row" style=" padding-left:20px">
+
+                                                <table style="text-align:left;border:none; width:100%">
+                                                    <tr>
+                                                        <td style="text-align:center;border:none;"><h4 style="text-decoration:underline;">On The Day Of Surgery</h4></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border:none; width:100% ">
+                                                            <p>1. Have a head bath &amp; do not apply kajal,sindhuram,turmeric power over the face before comming to the hospital.</p>
+                                                            <p>2. You can take breakfast before comming for the surgery.</p>
+                                                            <p>3. Only one attendant must accompany the patient.</p>
+                                                            <br />
+                                                            <p>Patient Counselor-</p>
+                                                            <p>Note:- After Surgery - free consultation valid only for 1 month.</p>
+                                                        </td>
+
+
+                                                    </tr>
+
+                                                </table>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

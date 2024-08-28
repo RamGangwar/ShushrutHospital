@@ -1,0 +1,167 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model ReceptionDashboardViewModel
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <form action="#" method="get" class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </form>
+        <div class="header-icon">
+            <i class="fa fa-tachometer"></i>
+        </div>
+        <div class="header-title">
+            <h1> Dashboard</h1>
+            <small> Dashboard features</small>
+            <ol class="breadcrumb hidden-xs">
+                <li><a href="~/Home/Index"><i class="pe-7s-home"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                <div class="panel panel-bd cardbox">
+                    <div class="panel-body">
+                        <div class="statistic-box">
+                            <h2>
+                                <span class="count-number">@Model.TotalPatients</span>
+                            </h2>
+                        </div>
+                        <div class="items pull-left">
+                            <i class="fa fa-users fa-2x"></i>
+                            <h4>Total Patients </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                <div class="panel panel-bd cardbox">
+                    <div class="panel-body">
+                        <div class="statistic-box">
+                            <h2>
+                                <span class="count-number">@Model.TodayPatients</span>
+                            </h2>
+                        </div>
+                        <div class="items pull-left">
+                            <i class="fa fa-users fa-2x"></i>
+                            <h4>Today Patients</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                <div class="panel panel-bd cardbox">
+                    <div class="panel-body">
+                        <div class="statistic-box">
+                            <h2>
+                                <span class="count-number">@Model.RemainingPatient</span>
+                            </h2>
+                        </div>
+                        <div class="items pull-left">
+                            <i class="fa fa-users fa-2x"></i>
+                            <h4>Remaining Patients</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                <div class="panel panel-bd cardbox">
+                    <div class="panel-body">
+                        <div class="statistic-box">
+                            <h2>
+                                <span class="count-number">@Model.TodayClosePatients</span>
+                            </h2>
+                        </div>
+                        <div class="items pull-left">
+                            <i class="fa fa-users fa-2x"></i>
+                            <h4>Today Closed Patients</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-lg-12 col-md-12">
+                <div class="panel panel-bd lobidrag">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h4>Remaining Patients </h4>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table id="dataTableExample2" class="table table-bordered table-striped table-hover">
+                                @if (Model.PatientViewModel!.Any())
+                                {
+                                    int i = 0;
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No</th>
+                                            <th>Name</th>
+                                            <th>Mobile No</th>
+                                            <th>Address</th>
+                                            <th>Gender</th>
+                                            <th>Blood group</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.PatientViewModel!)
+                                        {
+                                            i++;
+                                            <tr>
+                                                <td>
+                                                    <label>@i</label>
+                                                </td>
+                                                <td>@item.ApplicationUser!.FirstName&nbsp;@item.ApplicationUser!.LastName</td>
+                                                <td>@item.ApplicationUser!.PhoneNumber</td>
+                                                <td>@item.Address</td>
+                                                <td>
+                                                    @{
+                                                        var gender = item.Gender == "1" ? "Male" : "Female";
+                                                    }
+
+                                                    @gender
+                                                </td>
+                                                <td>@item.BloodGroup</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                }
+                                else
+                                {
+                                    <tfoot>
+                                        <tr>
+                                            <td>No records found.</td>
+                                        </tr>
+                                    </tfoot>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /.row -->
+    </section> <!-- /.content -->
+
+</div>
+@section scripts{
+    <script>
+
+        "use strict"; // Start of use strict
+
+        //counter
+        $('.count-number').counterUp({
+            delay: 10,
+            time: 5000
+        });
+    </script>
+}

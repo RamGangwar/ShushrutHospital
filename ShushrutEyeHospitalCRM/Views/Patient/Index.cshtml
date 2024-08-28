@@ -1,0 +1,92 @@
+﻿@using System.Security.Claims
+@model List<PatientViewModel>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="header-icon">
+            <i class="pe-7s-box1"></i>
+        </div>
+        <div class="header-title">
+            <h1>Patient</h1>
+            <small>Patient List</small>
+            <ol class="breadcrumb hidden-xs">
+                <li><a href="~/Home/Index"><i class="pe-7s-home"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-bd lobidrag">
+                    <div class="panel-heading">
+                        <div class="btn-group">
+                            <a class="btn btn-success" href="~/Patient/AddPatient"> <i class="fa fa-plus"></i>  Add Patient</a>
+                        </div>
+
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive" style="height:400px; overflow-y:scroll">
+                            <table class="table table-bordered table-hover" >
+                                <thead class="success">
+                                    <tr>
+                                        <th>Sr No</th>
+                                        <th>Name</th>
+                                        <th>MRD No</th>
+                                        <th>Mobile No</th>
+                                        <th>Address</th>
+                                        <th>Gender</th>
+                                        <th>Blood Group</th>
+                                        <th>Download</th>
+
+                                        <th>Discharge</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Any())
+                                    {
+                                        int i = 0;
+                                        foreach (var item in Model.OrderByDescending(o=>o.RegDate).ToList())
+                                        {
+                                            i++;
+                                            <tr>
+                                                <td>
+                                                    <label>@i</label>
+                                                </td>
+                                                <td>@item.ApplicationUser!.FirstName&nbsp;@item.ApplicationUser!.LastName</td>
+                                                <td>@item.MRDNo</td>
+                                                <td>@item.ApplicationUser!.PhoneNumber</td>
+                                                <td>@item.Address</td>
+                                                <td>
+                                                    @{
+                                                        var gender = @item.Gender == "1" ? "Male" : "Female";
+                                                    }
+                                                    @gender
+                                                </td>
+                                                <td>@item.BloodGroup</td>
+                                                <td align="center"><a onclick="DownloadPatientDetail(@item.Id)"><img height="30" width="30" src="~/images/download.png" /></a></td>
+
+                                                <td align="center">
+                                                    @if (User.FindFirstValue(ClaimTypes.Role) == CommonHelper.Reception && item.CounselingStatus == true && item.IsDischarged == false)
+                                                    {
+                                                        <a onclick="PatientDischarge(@item.Id)"> Click to Discharge</a>
+                                                    }
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> <!-- /.content -->
+</div>
+<script src="~/js/reports.js"></script>

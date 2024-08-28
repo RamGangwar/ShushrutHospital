@@ -1,0 +1,155 @@
+﻿<link rel="stylesheet" type="text/css" href="~/css/jquery_validation.css" />
+<link href="~/css/jquery-ui.css" rel="stylesheet" />
+@model List<DepartmentViewModel>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="header-icon">
+            <i class="pe-7s-note2"></i>
+        </div>
+        <div class="header-title">
+            <h1>Doctor</h1>
+            <small>Doctor Create</small>
+            <ol class="breadcrumb hidden-xs">
+                <li><a href="~/Home/Index"><i class="pe-7s-home"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- Form controls -->
+            <div class="col-sm-12">
+                <div class="panel panel-bd lobidrag">
+                    <div class="panel-heading">
+                        <div class="btn-group">
+                            <a class="btn btn-primary" href="~/Doctor/Index"> <i class="fa fa-list"></i>  Doctor List </a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form id="frmAddDoctor">
+                            <div class="row">
+                                <div class="col-sm-3 form-group">
+                                    <label>First Name<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtFirstName" name="txtFirstName" placeholder="Enter firstname" required>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Last Name<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtLastName" name="txtLastName" placeholder="Enter lastname" required>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Email<span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="txtEmail" name="txtEmail" placeholder="Enter email" required>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Mobile<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtMobile" name="txtMobile" placeholder="Enter mobile" required>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Password<span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" id="txtPassword" name="txtPassword" placeholder="Enter password" required>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Designation<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtDesignation" name="txtDesignation" placeholder="Enter designation" required>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Specialist<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtSpecialist" name="txtSpecialist" placeholder="Specialist" required>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Address<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtAddress" name="txtAddress" placeholder="Address" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 form-group">
+                                    <label>Department<span class="text-danger">*</span></label>
+                                    <select class="form-control" id="optDepartment" name="optDepartment" size="1">
+                                        <option selected class="test" disabled="disabled">--Select--</option>
+                                        @foreach (var item in Model)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Date of Birth<span class="text-danger">*</span></label>
+                                    <input name="txtDOB" class="form-control" type="date" placeholder="Date of Birth" id="txtDOB" autocomplete="false">
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Blood group</label>
+                                    <select class="form-control" id="optBloodGroup" name="optBloodGroup" size="1">
+                                        <option selected class="test" disabled="disabled">--Select--</option>
+                                        <option>A+</option>
+                                        <option>AB+</option>
+                                        <option>O+</option>
+                                        <option>AB-</option>
+                                        <option>B+</option>
+                                        <option>A-</option>
+                                        <option>B-</option>
+                                        <option>O-</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Picture upload</label>
+                                    <input type="file" class="form-control" name="fileProfilePic" id="fileProfilePic" accept="image/jpg,image/png,image/jpeg">
+                                </div>
+                              
+                            </div>
+                            <div class="row">
+
+                                <div class="col-sm-3 form-group">
+                                    <label>Gender<span class="text-danger">*</span></label><br>
+                                    <div class="form-control">
+                                        <label class="radio-inline form-radio">
+                                            <input type="radio" name="gender" checked="checked" value="Male">Male
+                                        </label>
+                                        <label class="radio-inline"><input type="radio" name="gender" value="Female">Female</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 form-check">
+                                    <label>Status</label><br>
+                                    <div class="form-control">
+                                        <label class="radio-inline"><input type="radio" name="status" value="1" checked="checked">Active</label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="status" value="0">Inctive
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>Signature upload</label>
+                                    <input type="file" class="form-control" name="fileSignature" id="fileSignature" accept="image/jpg,image/png,image/jpeg">
+                                </div>
+                                <div class="col-sm-3 form-check">
+                                    <br />
+                                    <img id="previewProfile"  />
+                                    <img id="previewSignature" />
+                                </div>
+                                <div class="col-sm-12 form-group">
+                                    <label>Short Biography</label>
+                                    <textarea id="txtBiography" name="txtBiography" class="form-control" rows="3" placeholder="Enter text ..."></textarea>
+                                </div>
+
+                                <div class="col-sm-12 reset-button">
+                                    <button type="button" id="btnSave" class="btn btn-success">Save</button>
+                                    <button type="button" id="btnReset" class="btn btn-warning">Reset</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section> <!-- /.content -->
+</div>
+@section scripts{
+    <!-- jquery validation -->
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script src="~/lib/flatpickr.min.js"></script>
+    <script src="~/lib/flatpicker-data.js"></script>
+    <script type="text/javascript" src="~/js/add_doctor.js"></script>
+}

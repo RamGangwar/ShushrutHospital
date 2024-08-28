@@ -1,0 +1,81 @@
+﻿@model List<DepartmentViewModel>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="header-icon">
+            <i class="pe-7s-box1"></i>
+        </div>
+        <div class="header-title">
+            <h1>Department</h1>
+            <small>Department List</small>
+            <ol class="breadcrumb hidden-xs">
+                <li><a href="~/Home/Index"><i class="pe-7s-home"></i> Home</a></li>
+                <li class="active">Department</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-bd lobidrag">
+                    <div class="panel-heading">
+
+                        <div class="btn-group">
+                            <a class="btn btn-success" href="~/Department/AddDepartment"> <i class="fa fa-plus"></i>  Add Department</a>
+                        </div>
+                    </div>
+                    <div class="panel-body">                       
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="tblDepartment">
+                                <thead>
+                                    <tr>
+                                        <th>Serial No</th>
+                                        <th>Department Name</th>
+                                        <th>Description</th>
+                                        <th>Status</th>
+                                       @*  <th>Action</th> *@
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Any())
+                                    {
+                                        int i = 0;
+                                        foreach (var item in Model)
+                                        {
+                                            i++;
+                                            <tr>
+                                                <td>@i</td>
+                                                <td>@item.Name</td>
+                                                <td>@item.Description</td>
+                                                <td>
+                                                    @switch (item.Status)
+                                                    {
+                                                        case true:
+                                                            <span class="label-success label label-default">Active</span>
+                                                            break;
+                                                        default:
+                                                            <span class="label-default label label-danger">Inactive</span>
+                                                            break;
+                                                    }
+                                                </td>
+                                               @*  <td>
+                                                    <button class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="left" title="Update"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                                    <button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="right" title="Delete "><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                                </td> *@
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> <!-- /.content -->
+</div>
+@* @section scripts{
+    <script type="text/javascript" src="~/js/departments.js"></script>
+} *@

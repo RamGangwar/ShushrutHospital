@@ -1,0 +1,279 @@
+﻿@using System.Security.Claims;
+@model BoolFilter
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="header-icon">
+            <i class="pe-7s-box1"></i>
+        </div>
+        <div class="header-title">
+            <h1>Patient</h1>
+            <small>Patient List</small>
+            <ol class="breadcrumb hidden-xs">
+                <li><a href="~/Home/Index"><i class="pe-7s-home"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+
+
+        <div class="row">
+            <div class="form-group col-sm-3">
+                <label>Patient Name</label>
+                <input type="text" class="form-control" id="txtPatientName" name="txtPatientName">
+            </div>
+            <div class="form-group col-sm-3">
+                <label>MRD No</label>
+                <input type="text" class="form-control" id="txtMRDNo" name="txtMRDNo">
+            </div>
+            <div class="form-group col-sm-3">
+                <label>Mobile No</label>
+                <input type="text" class="form-control" id="txtMobileNo" name="txtMobileNo">
+            </div>
+            <div class="form-group col-sm-3 " style="margin-top:25px">
+
+                <button type="button" id="btnfilter" class="btn btn-success">Search</button>
+            </div>
+
+
+            <div class="col-sm-12">
+                <div class="panel panel-bd lobidrag">
+                    <div class="panel-heading">
+                        <div class="btn-group">
+                            @*<a class="btn btn-success" href="~/Patient/AddPatient"> <i class="fa fa-plus"></i>  Add Patient</a>*@
+                        </div>
+
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <input type="hidden" id="hdnRole" value="@User.FindFirstValue(ClaimTypes.Role)" />
+                            <input type="hidden" id="hdnIsDischarged" value="@Model.IsDischarged.ToString()" />
+                            <input type="hidden" id="hdnDoctorStatus" value="@Model.DoctorStatus.ToString()" />
+                            <input type="hidden" id="hdnIsCounseling" value="@Model.IsCounseling.ToString()" />
+                            <input type="hidden" id="hdnCounselingStatus" value="@Model.CounselingStatus.ToString()" />
+                            <input type="hidden" id="hdnRefrectionStatus" value="@Model.RefrectionStatus.ToString()" />
+                            <table class="table table-bordered table-hover" id="tblPatientList">
+                                <thead class="success">
+                                    <tr>
+
+                                        <th>Name</th>
+                                        <th>Mobile No</th>
+                                        <th>MRD No</th>
+                                        <th>Address</th>
+                                        <th>Gender</th>
+                                        <th>Blood group</th>
+                                        <th>Reg. Date</th>
+                                        <th>Action</th>
+                                        <th>View</th>
+
+                                    </tr>
+                                </thead>
+                                @*<tbody>
+                                @if (Model.Any())
+                                {
+                                int i = 0;
+                                foreach (var item in Model)
+                                {
+                                i++;
+                                <tr>
+                                <td>
+                                <label>@i</label>
+                                </td>
+                                <td>@item.ApplicationUser!.FirstName&nbsp;@item.ApplicationUser!.LastName</td>
+                                <td>@item.ApplicationUser!.PhoneNumber</td>
+                                <td>@item.Address</td>
+                                <td>
+                                @{
+                                var gender = @item.Gender == "1" ? "Male" : "Female";
+                                }
+                                @gender</td>
+                                <td>@item.BloodGroup</td>
+                                @if (User.FindFirstValue(ClaimTypes.Role) == CommonHelper.Counsling && item.IsCounseling == true && item.CounselingStatus == false)
+                                {
+                                <td align="center"><a onclick="PatientCounselor(@item.Id)">Counseling</a></td>
+                                }
+                                else if (User.FindFirstValue(ClaimTypes.Role) == CommonHelper.Doctor || User.FindFirstValue(ClaimTypes.Role) == CommonHelper.Refraction)
+                                {
+                                <td align="center"><a onclick="DownloadPatient(@item.Id)"><img height="30" width="30" src="~/images/download.png" /></a></td>
+
+                                }
+                                else if (User.FindFirstValue(ClaimTypes.Role) == CommonHelper.Reception && item.CounselingStatus == true && item.IsDischarged == true)
+                                {
+                                <td align="center"><a onclick="DownloadDischargedPatient(@item.Id)"><img height="30" width="30" src="~/images/download.png" /></a></td>
+                                }
+                                else
+                                {
+                                <td align="center"></td>
+                                }
+
+                                </tr>
+                                }
+                                }
+                                </tbody>*@
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> <!-- /.content -->
+</div>
+<script src="~/js/reports.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+      
+        bindPatientList();
+    });
+
+    function bindPatientList() {
+        if ($.fn.DataTable.isDataTable('#tblPatientList')) {
+            $('#tblPatientList').DataTable().destroy();
+        }
+
+        $("#tblPatientList").DataTable({
+            searching: false,
+            "ordering": false,
+            info: true,
+            "sDom": 'Rfrtlip',
+            "oLanguage": {
+                "sLengthMenu": "Page Size _MENU_ ",
+            },
+            serverSide: true,
+            processing: true,
+            orderMulti: false,
+            destroy: true,
+            lengthChange: true,
+            pageLength: 20,
+            scrollY: 400,
+            scrollX: true,
+            scroller: true,
+            "bInfo": false,
+            lengthMenu: [[10, 20, 50, 1000], [10, 20, 50, "All"]],
+            ajax: {
+                url: '/Patient/GetPatientByFilter',
+                method: 'POST',
+                data: {
+                    PatientName: $("#txtPatientName").val(),
+                    MobileNo: $('#txtMobileNo').val(),
+                    MRDNo: $('#txtMRDNo').val(),
+                    IsDischarged: $('#hdnIsDischarged').val(),
+                    DoctorStatus: $('#hdnDoctorStatus').val(),
+                    IsCounseling: $('#hdnIsCounseling').val(),
+                    CounselingStatus: $('#hdnCounselingStatus').val(),
+                    RefrectionStatus: $('#hdnRefrectionStatus').val(),
+                },
+                type: 'Json',
+                dataSrc: function (response) {
+
+                    console.log(response.data)
+                    //$('#TotalLineItems').empty().html(response.recordsTotal);
+                    return response.data;
+                }
+            },
+            "order": [],
+            columns: [
+                {
+                    'data': 'applicationUser.firstName',
+                    'className': 'textleft',
+                    'render': function (data, type, row) {
+                        return row.applicationUser.firstName + " " + row.applicationUser.lastName;
+                    }
+                },
+                {
+                    'data': 'applicationUser.phoneNumber',
+                    'className': 'textleft',
+                    'render': function (data, type, row) {
+                        return data;
+                    }
+                },
+                {
+                    'data': 'mrdNo',
+                    'className': 'textleft',
+                    'render': function (data, type, row) {
+                        return data;
+                    }
+                },
+                {
+                    'data': 'address',
+                    'className': 'textleft',
+                    'render': function (data, type, row) {
+                        return data;
+                    }
+                },
+                {
+                    'data': 'gender',
+                    'className': 'textleft',
+                    'render': function (data, type, row) {
+                        return row.gender == "1" ? "Male" : "Female";
+                        //return data;
+                    }
+                },
+                {
+                    'data': 'bloodGroup',
+                    'className': 'textleft',
+                    'render': function (data, type, row) {
+                        return data;
+                    }
+                },
+                {
+                    'data': 'regDate',
+                    'className': 'textleft',
+                    'render': function (data, type, row) {
+                        //return data;
+                        return moment(row.regDate).format("DD/MM/YYYY");
+                    }
+                },
+                {
+                    'data': 'id',
+                    'className': 'textleft',
+                    'render': function (data, type, row) {
+                        var role = $("#hdnRole").val();
+                        if (role == "Counsling" && row.isCounseling == true && row.counselingStatus == false) {
+                            return '<a onclick="PatientCounselor(' + data + ')">Counseling</a>'
+                        }
+                        else if (role == "Doctor" || role == "Refraction") {
+                            return '<a onclick="DownloadPatient(' + data + ')"><img height="30" width="30" src="/images/download.png" /></a>'
+                        }
+                        else if (role == "Reception" && row.counselingStatus == true && row.isDischarged == true) {
+                            return '<a onclick="DownloadDischargedPatient(' + data + ')"><img height="30" width="30" src="/images/download.png" /></a>'
+                        }
+                        else {
+                            return ''
+                        }
+                    }
+                },
+                {
+                    'data': 'id',
+                    'className': 'textleft',
+                    'render': function (data, type, row) {
+                        var role = $("#hdnRole").val();
+                        //if (role == "Counsling" && row.isCounseling == true && row.counselingStatus == true) {
+                        //    return '<a href="/Reports/PatientCounselingView?Id=' + data +'" target="_blank"> <img  src="/images/view.png" /></a>'
+                        //}
+                        //else 
+                        if (role == "Doctor" || role == "Refraction") {
+                            return '<a href="/Reports/PatientCompleteDetailsView?Id=' + data +'" target="_blank"> <img  src="/images/view.png" /></a>'
+                        }
+                        else if (role == "Reception" && row.counselingStatus == true && row.isDischarged == true) {
+                            return '<a href="/Reports/DischargedPatientView?Id=' + data + '" target="_blank"> <img  src="/images/view.png" /></a>'
+                        }
+                        else {
+                            return ''
+                        }
+                    }
+                },
+            ],
+            "drawCallback": function (settings) {
+            },
+        });
+    }
+
+    $(document).on('click', '#btnfilter', function () {
+        bindPatientList();
+    });
+</script>

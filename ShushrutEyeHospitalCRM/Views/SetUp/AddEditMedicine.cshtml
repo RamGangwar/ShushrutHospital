@@ -1,0 +1,62 @@
+﻿@model MedicineViewModel
+<link rel="stylesheet" type="text/css" href="~/css/jquery_validation.css" />
+<link href="~/css/jquery-ui.css" rel="stylesheet" />
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="header-icon">
+            <i class="pe-7s-note2"></i>
+        </div>
+        <div class="header-title">
+            <h1>Master</h1>
+            <small>Medicine List</small>
+            <ol class="breadcrumb hidden-xs">
+                <li><a href="~/Home/Index"><i class="pe-7s-home"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- Form controls -->
+            <div class="col-sm-12">
+                <div class="panel panel-bd lobidrag">
+                    <div class="panel-heading">
+                        <div class="btn-group">
+                            <a class="btn btn-primary" href="~/SetUp/MedicineList">
+                                <i class="fa fa-list"></i>  Medicine List
+                            </a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        @using (Html.BeginForm("AddEditMedicine", "SetUp", FormMethod.Post, new { @id = "frmAddEditMedicine" }))
+                        {
+                            <form id="frmAddPatient">
+                                <div class="row">
+                                    <div class="form-group col-sm-12">
+                                        <label>Medicine Name<span class="text-danger">*</span></label>
+                                        @Html.TextBoxFor(m=>m.MedicineName,new{@Id="txtMedicineName",@class="form-control",placeholder="Enter Medicine Name",required=""})
+                                        @Html.HiddenFor(m=>m.MedicineId)
+                                        @Html.ValidationMessageFor(m=>m.MedicineName)
+                                    </div>
+
+                                    <div class="col-sm-12 reset-button">
+                                        <button type="submit" id="btnSave" class="btn btn-success">Save</button>
+                                        <button type="reset" id="btnReset" class="btn btn-warning">Reset</button>
+                                    </div>
+                                </div>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> <!-- /.content -->
+</div>
+@section scripts{
+    <!-- jquery validation -->
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script type="text/javascript" src="~/js/SetUp.js"></script>
+}

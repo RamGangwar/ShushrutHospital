@@ -1,0 +1,283 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Authorization\AccessDenied.cshtml" />
+    <Content Remove="wwwroot\images\logo.png" />
+    <Content Remove="wwwroot\js\login.js" />
+    <Content Remove="wwwroot\js\signup.js" />
+    <Content Remove="wwwroot\js\tinymce\plugins\preview\plugin.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Appointment\BookAppointment.cshtml" />
+    <None Include="Views\Appointment\Index.cshtml" />
+    <None Include="Views\Authorization\ForgotPassword.cshtml" />
+    <None Include="Views\Authorization\Index.cshtml" />
+    <None Include="Views\Authorization\AccessDenied.cshtml" />
+    <None Include="Views\Authorization\PageNotFound.cshtml" />
+    <None Include="Views\Authorization\Profile.cshtml" />
+    <None Include="Views\Authorization\SignUp.cshtml" />
+    <None Include="Views\Department\AddDepartment.cshtml" />
+    <None Include="Views\Department\Index.cshtml" />
+    <None Include="Views\Doctor\AddDoctor.cshtml" />
+    <None Include="Views\Doctor\Index.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Patient\AddPatient.cshtml" />
+    <None Include="Views\Patient\Index.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_AccountLayout.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\assets\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\assets\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\assets\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\assets\dist\js\custom.js" />
+    <None Include="wwwroot\assets\dist\js\custom1.js" />
+    <None Include="wwwroot\assets\font-awesome\fonts\fontawesome-webfont3e6e.svg" />
+    <None Include="wwwroot\assets\font-awesome\fonts\fontawesome-webfont3e6e.woff2" />
+    <None Include="wwwroot\assets\pe-icon-7-stroke\fonts\Pe-icon-7-strokebb1d.svg" />
+    <None Include="wwwroot\assets\plugins\bootstrap-toggle\bootstrap-toggle.min.js" />
+    <None Include="wwwroot\assets\plugins\chartJs\Chart.min.js" />
+    <None Include="wwwroot\assets\plugins\counterup\jquery.counterup.min.js" />
+    <None Include="wwwroot\assets\plugins\counterup\waypoints.js" />
+    <None Include="wwwroot\assets\plugins\datamaps\d3.min.js" />
+    <None Include="wwwroot\assets\plugins\datamaps\datamaps.all.min.js" />
+    <None Include="wwwroot\assets\plugins\datamaps\topojson.min.js" />
+    <None Include="wwwroot\assets\plugins\emojionearea\emojionearea.min.js" />
+    <None Include="wwwroot\assets\plugins\fastclick\fastclick.min.js" />
+    <None Include="wwwroot\assets\plugins\fullcalendar\fullcalendar.min.js" />
+    <None Include="wwwroot\assets\plugins\fullcalendar\lib\moment.min.js" />
+    <None Include="wwwroot\assets\plugins\icheck\icheck.min.js" />
+    <None Include="wwwroot\assets\plugins\ion\js\ion.rangeSlider.min.js" />
+    <None Include="wwwroot\assets\plugins\jquery-ui-1.12.1\jquery-ui.min.js" />
+    <None Include="wwwroot\assets\plugins\jQuery\jquery-1.12.4.min.js" />
+    <None Include="wwwroot\assets\plugins\lobipanel\lobipanel.min.js" />
+    <None Include="wwwroot\assets\plugins\modals\classie.js" />
+    <None Include="wwwroot\assets\plugins\modals\modalEffects.js" />
+    <None Include="wwwroot\assets\plugins\moment\moment.js" />
+    <None Include="wwwroot\assets\plugins\monthly\monthly.js" />
+    <None Include="wwwroot\assets\plugins\NotificationStyles\fonts\linecons\lineconsba9e.svg" />
+    <None Include="wwwroot\assets\plugins\NotificationStyles\js\classie.js" />
+    <None Include="wwwroot\assets\plugins\NotificationStyles\js\modernizr.custom.js" />
+    <None Include="wwwroot\assets\plugins\NotificationStyles\js\notificationFx.js" />
+    <None Include="wwwroot\assets\plugins\NotificationStyles\js\snap.svg-min.js" />
+    <None Include="wwwroot\assets\plugins\pace\pace.min.js" />
+    <None Include="wwwroot\assets\plugins\slimScroll\jquery.slimscroll.min.js" />
+    <None Include="wwwroot\assets\plugins\sparkline\sparkline.min.js" />
+    <None Include="wwwroot\assets\plugins\summernote\summernote.js" />
+    <None Include="wwwroot\assets\plugins\sweetalert\sweetalert.min.js" />
+    <None Include="wwwroot\assets\plugins\toastr\toastr.min.js" />
+    <None Include="wwwroot\assets\socicon\fonts\socicon.svg" />
+    <None Include="wwwroot\assets\themify-icons\fonts\themify9f24.svg" />
+    <None Include="wwwroot\assets\weather-icons\font\weathericons-regular-webfont.svg" />
+    <None Include="wwwroot\assets\weather-icons\font\weathericons-regular-webfont.woff2" />
+    <None Include="wwwroot\images\logo.png" />
+    <None Include="wwwroot\js\login.js" />
+    <None Include="wwwroot\js\signup.js" />
+    <None Include="wwwroot\js\add_department.js" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\tinymce\icons\default\icons.min.js" />
+    <None Include="wwwroot\js\tinymce\langs\README.md" />
+    <None Include="wwwroot\js\tinymce\models\dom\model.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\accordion\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\advlist\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\anchor\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\autolink\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\autoresize\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\autosave\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\charmap\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\codesample\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\code\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\directionality\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\emoticons\js\emojiimages.js" />
+    <None Include="wwwroot\js\tinymce\plugins\emoticons\js\emojiimages.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\emoticons\js\emojis.js" />
+    <None Include="wwwroot\js\tinymce\plugins\emoticons\js\emojis.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\emoticons\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\fullscreen\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\ar.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\bg_BG.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\ca.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\cs.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\da.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\de.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\el.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\en.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\es.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\eu.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\fa.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\fi.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\fr_FR.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\he_IL.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\hi.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\hr.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\hu_HU.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\id.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\it.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\ja.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\kk.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\ko_KR.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\ms.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\nb_NO.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\nl.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\pl.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\pt_BR.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\pt_PT.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\ro.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\ru.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\sk.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\sl_SI.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\sv_SE.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\th_TH.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\tr.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\uk.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\vi.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\zh_CN.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\js\i18n\keynav\zh_TW.js" />
+    <None Include="wwwroot\js\tinymce\plugins\help\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\image\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\importcss\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\link\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\lists\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\media\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\pagebreak\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\preview\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\print\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\quickbars\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\save\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\searchreplace\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\table\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\template\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\visualblocks\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\visualchars\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\plugins\wordcount\plugin.min.js" />
+    <None Include="wwwroot\js\tinymce\skins\content\dark\content.js" />
+    <None Include="wwwroot\js\tinymce\skins\content\default\content.js" />
+    <None Include="wwwroot\js\tinymce\skins\content\document\content.js" />
+    <None Include="wwwroot\js\tinymce\skins\content\tinymce-5-dark\content.js" />
+    <None Include="wwwroot\js\tinymce\skins\content\tinymce-5\content.js" />
+    <None Include="wwwroot\js\tinymce\skins\content\writer\content.js" />
+    <None Include="wwwroot\js\tinymce\skins\ui\oxide-dark\content.inline.js" />
+    <None Include="wwwroot\js\tinymce\skins\ui\oxide-dark\content.js" />
+    <None Include="wwwroot\js\tinymce\skins\ui\oxide-dark\skin.js" />
+    <None Include="wwwroot\js\tinymce\skins\ui\oxide-dark\skin.shadowdom.js" />
+    <None Include="wwwroot\js\tinymce\skins\ui\oxide\content.inline.js" />
+    <None Include="wwwroot\js\tinymce\skins\ui\oxide\content.js" />
+    <None Include="wwwroot\js\tinymce\skins\ui\oxide\skin.js" />
+    <None Include="wwwroot\js\tinymce\skins\ui\oxide\skin.shadowdom.js" />
+    <None Include="wwwroot\js\tinymce\skins\ui\tinymce-5-dark\content.inline.js" />
+    <None Include="wwwroot\js\tinymce\skins\ui\tinymce-5-dark\content.js" />
+    <None Include="wwwroot\js\tinymce\skins\ui\tinymce-5-dark\skin.js" />
+    <None Include="wwwroot\js\tinymce\skins\ui\tinymce-5-dark\skin.shadowdom.js" />
+    <None Include="wwwroot\js\tinymce\skins\ui\tinymce-5\content.inline.js" />
+    <None Include="wwwroot\js\tinymce\skins\ui\tinymce-5\content.js" />
+    <None Include="wwwroot\js\tinymce\skins\ui\tinymce-5\skin.js" />
+    <None Include="wwwroot\js\tinymce\skins\ui\tinymce-5\skin.shadowdom.js" />
+    <None Include="wwwroot\js\tinymce\themes\silver\theme.min.js" />
+    <None Include="wwwroot\js\tinymce\tinymce.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\LICENSE" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\LICENSE.md" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
+    <None Include="wwwroot\Rotativa\wkhtmltoimage.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Rotativa\wkhtmltopdf.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.24" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.24" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.24" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.24">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Rotativa.AspNetCore" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\CommonResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CommonResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+	
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\CommonResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommonResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\webfonts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\js\tinymce\tinymce.d.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\Rotativa\help-wkhtmltoimage.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Rotativa\help-wkhtmltopdf.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

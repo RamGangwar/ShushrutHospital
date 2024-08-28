@@ -1,0 +1,152 @@
+﻿<link rel="stylesheet" type="text/css" href="~/css/jquery_validation.css" />
+<link href="~/css/jquery-ui.css" rel="stylesheet" />
+@model AddPatientViewModel
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="header-icon">
+            <i class="pe-7s-note2"></i>
+        </div>
+        <div class="header-title">
+            <h1>Patient</h1>
+            <small>Patient List</small>
+            <ol class="breadcrumb hidden-xs">
+                <li><a href="~/Home/Index"><i class="pe-7s-home"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- Form controls -->
+            <div class="col-sm-12">
+                <div class="panel panel-bd lobidrag">
+                    <div class="panel-heading">
+                        <div class="btn-group">
+                            <a class="btn btn-primary" href="~/Patient/Index">
+                                <i class="fa fa-list"></i>  Patient List
+                            </a>
+
+                        </div>
+                        <div class="btn-group">
+                            <input type="text" id="txtMRDNo" name="txtMRDNo" class="form-control" placeholder="Search by MRDNo" />
+                            <input type="hidden" id="hdnMRDNo" value="0" />
+                            <input type="hidden" id="hdnbySearch" value="0" />
+                        </div>
+                        <div class="btn-group">
+                            <input type="text" id="txtContactNo" name="txtContactNo" class="form-control" placeholder="Search by Mobile No" />
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form id="frmAddPatient">
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <label>First Name<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtFirstName" name="txtFirstName" placeholder="Enter first name" required>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Last Name<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtLastName" name="txtLastName" placeholder="Enter last name" required>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Mobile<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtMobile" name="txtMobile" placeholder="Enter mobile number" required>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" id="txtEmail" name="txtEmail" placeholder="Enter email address">
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Date of Birth<span class="text-danger">*</span></label>
+                                    <input name="txtDOB" id="txtDOB" class="form-control" type="date" placeholder="Date of birth">
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Consultancy Fee<span class="text-danger">*</span></label>
+                                    <input name="txtConsultancyFee" id="txtConsultancyFee" class="form-control" type="text" placeholder="Enter consultancy fee">
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Doctors<span class="text-danger">*</span></label>
+                                    <select class="form-control" id="optDoctors" name="optDoctors">
+                                        <option selected="selected" disabled="disabled" class="test" value="0">--Select--</option>
+                                        @foreach (var item in Model.Doctors!)
+                                        {
+                                            <option value="@item.Id">@item.ApplicationUser!.FirstName&nbsp;@item.ApplicationUser!.LastName&nbsp;(@item.Designation)</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Refractions<span class="text-danger">*</span></label>
+                                    <select class="form-control" id="optRefraction" name="optRefraction">
+                                        <option selected="selected" disabled="disabled" class="test" value="0">--Select--</option>
+                                        @foreach (var item in Model.Refractions!)
+                                        {
+                                            <option value="@item.Id">@item.ApplicationUser!.FirstName&nbsp;@item.ApplicationUser!.LastName&nbsp;</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Blood group</label>
+                                    <select class="form-control" id="optBloodGroup" name="optBloodGroup">
+                                        <option selected="selected" disabled="disabled" class="test" value="">--Select--</option>
+                                        <option>A+</option>
+                                        <option>AB+</option>
+                                        <option>O+</option>
+                                        <option>AB-</option>
+                                        <option>B+</option>
+                                        <option>A-</option>
+                                        <option>B-</option>
+                                        <option>O-</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Gender<span class="text-danger">*</span></label><br>
+                                    <div class="form-control">
+                                        <label class="radio-inline"><input name="gender" value="1" type="radio">Male</label>
+                                        <label class="radio-inline"><input name="gender" value="0" type="radio">Female</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Status<span class="text-danger">*</span></label><br>
+                                    <div class="form-control">
+                                        <label class="radio-inline"><input type="radio" name="status" value="1" checked="checked">Active</label> <label class="radio-inline"><input type="radio" name="status" value="0">Inctive</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label>Current Eye Problem<span class="text-danger">*</span></label>
+                                    @*<textarea class="form-control" id="txtProblem" name="txtProblem" rows="3" placeholder="Please describe your problem..."></textarea>*@
+                                    <select class="form-control" id="txtProblem" name="txtProblem">
+                                        <option selected="selected" disabled="disabled" class="test" value="">--Select--</option>
+                                        @foreach (var item in Model.Problems!)
+                                        {
+                                            @*<option value="@item.ProblemId">@item.ProblemName</option>*@
+                                            <option value="@item.ProblemName">@item.ProblemName</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-3" id="othrProb" style="display:none">
+                                    <label>Other Problem</label>
+                                    <input type="text" class="form-control" id="txtOtherProblem" name="txtOtherProblem" placeholder="Other Problem" />
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <label>Address<span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="txtAddress" name="txtAddress" placeholder="Address"></textarea>
+                                </div>
+
+                                <div class="col-sm-12 reset-button">
+                                    <button type="button" id="btnSave" class="btn btn-success">Save</button>
+                                    <button type="button" id="btnReset" class="btn btn-warning">Reset</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> <!-- /.content -->
+</div>
+@section scripts{
+    <!-- jquery validation -->
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script type="text/javascript" src="~/js/add_patient.js"></script>
+}

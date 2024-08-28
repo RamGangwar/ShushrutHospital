@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "/Views/Shared/_AccountLayout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/css/jquery_validation.css" />
+<div class="login-wrapper">
+
+    <div class="container-center lg">
+        <div class="panel panel-bd">
+            <div class="panel-heading">
+                <div class="view-header">
+                    <div class="header-icon">
+                        <i class="pe-7s-unlock"></i>
+                    </div>
+                    <div class="header-title">
+                        <h3>Register</h3>
+                        <small><strong>Please enter your data to register.</strong></small>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <form id="frmSignUp">
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>First Name</label>
+                            <input type="text" id="txtfirstName" class="form-control" name="txtfirstName">
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label>Last Name</label>
+                            <input type="text" id="txtlastName" class="form-control" name="txtlastName">
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label>Mobile</label>
+                            <input type="text" id="txtmobile" minlength="10" maxlength="10" class="form-control" name="txtmobile">
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label>Eamil</label>
+                            <input type="email" id="txtemail" class="form-control" name="txtemail">
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label>Password</label>
+                            <input type="password" id="txtpassword" class="form-control" name="txtpassword">
+                        </div>
+
+                    </div>
+                    <div>
+                        <button type="button" id="btnSubmit" class="btn btn-success">Register</button>
+                        <button type="button" id="btnReset" class="btn btn-warning">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script type="text/javascript" src="~/js/signup.js"></script>
+}

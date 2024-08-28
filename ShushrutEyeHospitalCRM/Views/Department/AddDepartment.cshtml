@@ -1,0 +1,66 @@
+﻿<link rel="stylesheet" type="text/css" href="~/css/jquery_validation.css" />
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="header-icon">
+            <i class="pe-7s-note2"></i>
+        </div>
+        <div class="header-title">            
+            <h1>Department</h1>
+            <small>Department Create</small>
+            <ol class="breadcrumb hidden-xs">
+                <li><a href="~/Home/Index"><i class="pe-7s-home"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- Form controls -->
+            <div class="col-sm-12">
+                <div class="panel panel-bd lobidrag">
+                    <div class="panel-heading">
+                        <div class="btn-group">
+                            <a class="btn btn-primary" href="~/Department/Index"> <i class="fa fa-list"></i>  Department List</a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+
+                        <form class="col-sm-6" id="frmDepartment">
+                            <div class="form-group">
+                                <label>Department Name<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="txtDepartment" id="txtDepartment" placeholder="Enter department name">
+                            </div>
+                            <div class="form-group">
+                                <label>Description<span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="txtDescription" name="txtDescription" rows="3"></textarea>
+                            </div>
+                            <div class="form-check">
+                                <label>Status<span class="text-danger">*</span></label><br>
+                                <label class="radio-inline">
+                                    <input type="radio" name="status" value="1" checked="checked">Active
+                                </label>
+                                <label class="radio-inline"><input type="radio" name="status" value="0">Inctive</label>
+                            </div>
+
+                            <div class="reset-button">                                
+                                <button type="button" class="btn btn-success" id="btnSubmit">Save</button>
+                                <button id="btnReset" class="btn btn-warning" type="button">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </section> <!-- /.content -->
+</div>
+@section scripts{
+    <!-- jquery validation -->
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script type="text/javascript" src="~/js/add_department.js"></script>
+}
